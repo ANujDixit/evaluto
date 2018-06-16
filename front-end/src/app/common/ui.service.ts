@@ -1,12 +1,5 @@
 import { Injectable, Component, Inject } from '@angular/core'
-import {
-  MatSnackBar,
-  MatSnackBarConfig,
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  MatDialogConfig,
-} from '@angular/material'
+import { MatSnackBar, MatSnackBarConfig, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material'
 import { Observable } from 'rxjs'
 
 @Injectable()

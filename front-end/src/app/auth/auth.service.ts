@@ -39,7 +39,8 @@ export const defaultAuthStatus = {
 export class AuthService extends CacheService implements IAuthService {
   private readonly authProvider: (
     email: string,
-    password: string
+    password: string,
+    tenantCode: string
   ) => Observable<IServerAuthResponse>
   
   authStatus = new BehaviorSubject<IAuthStatus>(
@@ -57,8 +58,9 @@ export class AuthService extends CacheService implements IAuthService {
     const signin = { "signin": { "tenant_code": tenantCode, "email": email, "password": password}} 
     const loginResponse = this.api.post('signin', signin).pipe(
       map(value => {
-        this.setToken(value["accessToken"])
-        return decode(value.accessToken) as IAuthStatus
+        console.log(value)
+        this.setToken(value.access_token)
+        return decode(value.access_token) as IAuthStatus
       }),
       catchError(transformError)
     )

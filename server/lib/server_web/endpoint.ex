@@ -36,6 +36,8 @@ defmodule ServerWeb.Endpoint do
     store: :cookie,
     key: "_server_key",
     signing_salt: "QYFdFPbO"
+    
+  plug CORSPlug  
 
   plug ServerWeb.Router
 

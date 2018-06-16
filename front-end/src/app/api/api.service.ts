@@ -12,12 +12,12 @@ const httpOptions = {
 
 export class ApiService {
 
-  //private baseUrl = "https://ubuntu-swaaps.c9users.io:8082/api"
-  private baseUrl = "http://localhost:8082/api"
+  private baseUrl = "https://evaluto-anytimetests.c9users.io:8082/api"
+  //private baseUrl = "http://localhost:8082/api"
 
   constructor(private http: HttpClient) { }
   
-  get(url: string, params?: Object) {
+  get(url: string, params?: Object): Observable<any>  {
     if (params) {
       let params = new HttpParams()
       Object.keys(params).map(k => params.set(k, params[k]))
@@ -27,15 +27,15 @@ export class ApiService {
     }
   }
   
-  post(url: string, body: Object) {
+  post(url: string, body: Object): Observable<any>  {
     return this.http.post(`${this.baseUrl}/${url}`, JSON.stringify(body), httpOptions);
   }
   
-  put(url: string, body: Object) {
+  put(url: string, body: Object): Observable<any>  {
     return this.http.put(`${this.baseUrl}/${url}`, JSON.stringify(body), httpOptions);
   }
   
-  delete(url: string) {
+  delete(url: string): Observable<any>  {
     return this.http.delete(`${this.baseUrl}/${url}`);
   }
   

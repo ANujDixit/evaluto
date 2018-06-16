@@ -12,12 +12,13 @@ import { AdminModule } from './admin/admin.module';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserModule } from './user/user.module';
-//import { AuthService } from './auth/auth.service';
+import { AuthService } from './auth/auth.service';
 import { ApiService } from './api/api.service';
 import { LoginComponent } from './login/login.component';
 import { SimpleDialogComponent, UiService } from './common/ui.service';
 import { HttpHeaderInterceptor } from './api/http-header-interceptor';
 import { HttpErrorInterceptor } from './api/http-error-interceptor';
+import { MatSnackBarModule }  from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -37,10 +38,11 @@ import { HttpErrorInterceptor } from './api/http-error-interceptor';
     MaterialModule,
     FlexLayoutModule,
     AdminModule,
-    UserModule
+    UserModule,
+    MatSnackBarModule
   ],
   providers: [
-    //AuthService, 
+    AuthService, 
     ApiService,
     UiService,
     {

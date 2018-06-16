@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmailValidation, PasswordValidation, TenantCodeValidation	}	from	'../common/validations';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-//import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { Role } from '../auth/role.enum';
 import { UiService } from '../common/ui.service';
 
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    //private authService: AuthService,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
     private uiService: UiService
@@ -39,16 +39,16 @@ export class LoginComponent implements OnInit {
   }
   
 	async login(submittedForm: FormGroup) {
-	  const signin = { "signin": submittedForm.value}  
-    // this.api.post('signin', signin)
-    //   .subscribe(authStatus => {
-    //     if (authStatus.isAuthenticated) {
-    //       this.uiService.showToast(`Welcome! Role: ${authStatus.userRole}`)
-    //       this.router.navigate([
-    //         this.redirectUrl || this.homeRoutePerRole(authStatus.userRole),
-    //       ])
-    //     }
-    //   }, error => (this.loginError = error))
+	  this.authService
+      .login(submittedForm.value.tenantCode, submittedForm.value.email, submittedForm.value.password)
+      .subscribe(authStatus => {
+        if (authStatus.isAuthenticated) {
+          this.uiService.showToast(`Welcome! Role: ${authStatus.userRole}`)
+          this.router.navigate([
+            this.redirectUrl || this.homeRoutePerRole(authStatus.userRole),
+          ])
+        }
+      }, error => (this.loginError = error))
   }
 
   homeRoutePerRole(role: Role) {
