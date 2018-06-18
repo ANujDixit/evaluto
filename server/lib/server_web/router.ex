@@ -17,11 +17,22 @@ defmodule ServerWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    
   end
 
-  scope "/api", ServerWeb.Api do
+  scope "/api", ServerWeb.Api, as: :api do
     pipe_through :api
     
     post "/signin", AuthenticationController, :create 
+    post "/signup", RegistrationController, :create
+   
   end
+  
+  scope "/admin", ServerWeb.Admin do
+    pipe_through :browser 
+
+    resources "/tenants", TenantController, except: [:new, :edit]
+  end
+  
+  
 end

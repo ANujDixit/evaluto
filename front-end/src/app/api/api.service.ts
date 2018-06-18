@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,7 +18,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
   
-  get(url: string, params?: Object): Observable<any>  {
+  get(url: string, params?: Object) {
     if (params) {
       let params = new HttpParams()
       Object.keys(params).map(k => params.set(k, params[k]))
@@ -28,7 +29,9 @@ export class ApiService {
   }
   
   post(url: string, body: Object): Observable<any>  {
-    return this.http.post(`${this.baseUrl}/${url}`, JSON.stringify(body), httpOptions);
+    return this.http.post(`${this.baseUrl}/${url}`, JSON.stringify(body), httpOptions).pipe(
+        map((res) => {return (res["data"]) ? res["data"] : res ;}))
+
   }
   
   put(url: string, body: Object): Observable<any>  {

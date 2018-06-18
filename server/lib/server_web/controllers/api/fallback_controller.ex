@@ -7,4 +7,10 @@ defmodule ServerWeb.Api.FallbackController do
     |> render(ServerWeb.Api.ErrorView, :"404")
   end
   
+   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> render(ServerWeb.Api.ChangesetView, "error.json", changeset: changeset)
+  end
+  
 end
