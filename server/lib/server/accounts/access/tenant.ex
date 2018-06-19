@@ -2,8 +2,8 @@ defmodule Server.Accounts.Access.Tenant do
   defmacro __using__(_) do
     quote do  
       import Ecto.Query, warn: false
+      
       alias Server.Repo
-    
       alias Server.Accounts.Tenant
      
       def list_tenants do
@@ -32,8 +32,14 @@ defmodule Server.Accounts.Access.Tenant do
         Tenant.changeset(tenant, %{})
       end
       
+      # Custom Functions
       def get_tenant_by_code(code) do
-        Repo.get_by(Tenant, code: code)
+        Tenant
+        |> Repo.get_by(code: code)
+        |> case do
+          nil -> {:error, :tenant_not_found}
+          tenant -> tenant
+        end
       end
     end
   end

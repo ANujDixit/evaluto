@@ -13,4 +13,10 @@ defmodule ServerWeb.Api.FallbackController do
     |> render(ServerWeb.Api.ChangesetView, "error.json", changeset: changeset)
   end
   
+  def call(conn, {:error, {:unauthorized, msg: msg}}) do
+    conn
+    |> put_status(:unauthorized)
+    |> json(%{error: msg})
+  end
+  
 end

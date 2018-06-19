@@ -16,6 +16,10 @@ config :server, ServerWeb.Endpoint,
   render_errors: [view: ServerWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Server.PubSub,
            adapter: Phoenix.PubSub.PG2]
+           
+config :server, Server.Guardian,
+       issuer: "server",
+       secret_key: "QWhtuwWyddyBIsFVR8QVtAvbi8lXAJJ9hBxxGuIQv4KiJvCB8Zu9C9WmVW1S8ugn"           
 
 # Configures Elixir's Logger
 config :logger, :console,
