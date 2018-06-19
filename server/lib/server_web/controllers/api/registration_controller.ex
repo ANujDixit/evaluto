@@ -13,7 +13,6 @@ defmodule ServerWeb.Api.RegistrationController do
       |> put_status(:created)
       |> render("show.json", tenant: tenant)
     end
-    
   end
   
 end  

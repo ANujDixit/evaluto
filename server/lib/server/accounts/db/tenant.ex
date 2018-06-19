@@ -3,6 +3,7 @@ defmodule Server.Accounts.Tenant do
   import Ecto.Changeset
   
   alias Server.Accounts
+  alias Server.Accounts.{User, Credential, Group, UserGroup}
 
   schema "tenants" do
     field :name, :string
@@ -10,6 +11,11 @@ defmodule Server.Accounts.Tenant do
     field :slug, :string
     field :verified, :boolean, default: false
     field :active, :boolean, default: false
+    
+    has_many :users, User
+    has_many :credentials, Credential
+    has_many :groups, Group
+    has_many :users_groups, UserGroup
 
     timestamps()
   end

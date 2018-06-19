@@ -3,10 +3,7 @@ defmodule ServerWeb.Api.RegistrationView do
   alias ServerWeb.Api.RegistrationView
   
   def render("show.json", %{tenant: tenant}) do
-    %{data: 
-      %{message: "Account successfully created"}
-    }
+    %{data: %{message: "Account successfully created"}}
   end
-
   
 end
