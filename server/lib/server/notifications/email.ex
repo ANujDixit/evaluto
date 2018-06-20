@@ -27,6 +27,7 @@ defimpl Server.Notifications, for: Server.Notifications.Email do
       |> assign(:tenant_code, tenant_code)
       |> assign(:verification_url, verification_url)
       |> render("account_verification.html")
+      |> render("account_verification.text")
   end
   
   defp base_email(email) do
