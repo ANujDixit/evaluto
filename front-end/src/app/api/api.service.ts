@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { transformHttpError } from '../common/common';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,23 +24,30 @@ export class ApiService {
       let params = new HttpParams()
       Object.keys(params).map(k => params.set(k, params[k]))
       return this.http.get(`${this.baseUrl}/${url}`, { params: params })
+     
     } else {
       return this.http.get(`${this.baseUrl}/${url}`)
     }
   }
   
   post(url: string, body: Object): Observable<any>  {
-    return this.http.post(`${this.baseUrl}/${url}`, JSON.stringify(body), httpOptions).pipe(
-        map((res) => {return (res["data"]) ? res["data"] : res ;}))
-
+    return this.http.post(`${this.baseUrl}/${url}`, JSON.stringify(body), httpOptions)
+      .pipe(
+            map((res: HttpResponse<any>) => this.extractData(res)),
+            catchError(transformHttpError)
+      );
   }
   
   put(url: string, body: Object): Observable<any>  {
-    return this.http.put(`${this.baseUrl}/${url}`, JSON.stringify(body), httpOptions);
+    return this.http.put(`${this.baseUrl}/${url}`, JSON.stringify(body), httpOptions)
   }
   
   delete(url: string): Observable<any>  {
     return this.http.delete(`${this.baseUrl}/${url}`);
+  }
+  
+  private extractData(resp) {
+    return (resp["data"]) ? resp["data"] : resp ;
   }
   
 }

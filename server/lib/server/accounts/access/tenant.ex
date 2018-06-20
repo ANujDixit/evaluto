@@ -32,8 +32,12 @@ defmodule Server.Accounts.Access.Tenant do
         Tenant.changeset(tenant, %{})
       end
       
-      # Custom Functions
       def get_tenant_by_code(code) do
+        Tenant
+        |> Repo.get_by(code: code)
+      end  
+  
+      def get_tenant_by_code(:auth, code) do
         Tenant
         |> Repo.get_by(code: code)
         |> case do

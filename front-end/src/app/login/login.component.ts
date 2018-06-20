@@ -41,14 +41,19 @@ export class LoginComponent implements OnInit {
 	async login(submittedForm: FormGroup) {
 	  this.authService
       .login(submittedForm.value.tenantCode, submittedForm.value.email, submittedForm.value.password)
-      .subscribe(authStatus => {
-        if (authStatus.isAuthenticated) {
-          this.uiService.showToast(`Welcome! Role: ${authStatus.userRole}`)
-          this.router.navigate([
-            this.redirectUrl || this.homeRoutePerRole(authStatus.userRole),
-          ])
+      .subscribe(
+        (authStatus) => {
+          if (authStatus.isAuthenticated) {
+            this.uiService.showToast(`Welcome! Role: ${authStatus.userRole}`)
+            this.router.navigate([
+              this.redirectUrl || this.homeRoutePerRole(authStatus.userRole),
+            ])
+          }
+        }, 
+        (errors) => {
+          this.loginError = errors.errors;
         }
-      }, error => (this.loginError = error))
+      )
   }
 
   homeRoutePerRole(role: Role) {

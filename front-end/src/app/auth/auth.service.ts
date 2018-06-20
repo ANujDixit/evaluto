@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import * as decode from 'jwt-decode'
 import { BehaviorSubject, Observable, of, throwError as observableThrowError } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
-import { transformError } from '../common/common'
+import { transformHttpError } from '../common/common'
 import { CacheService } from './cache.service'
 import { Role } from './role.enum'
 import { ApiService } from '../api/api.service'
@@ -20,7 +20,6 @@ export interface IAuthStatus {
   userRole: Role
   userId: string
   tenantId: string
-  tenantSlug: string
 }
 
 interface IServerAuthResponse {
@@ -31,9 +30,12 @@ export const defaultAuthStatus = {
   isAuthenticated: false,
   userRole: Role.None,
   userId: null,
-  tenantId: null,
-  tenantSlug: null
+  tenantId: null
 }
+
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class AuthService extends CacheService implements IAuthService {
@@ -46,9 +48,10 @@ export class AuthService extends CacheService implements IAuthService {
   authStatus = new BehaviorSubject<IAuthStatus>(
     this.getItem('authStatus') || defaultAuthStatus
   )
+  
+  private signInUrl = "https://evaluto-anytimetests.c9users.io:8082/api/signin"
 
-  constructor(private httpClient: HttpClient,
-              private api: ApiService) {
+  constructor(private http: HttpClient) {
     super()
     this.authStatus.subscribe(authStatus => this.setItem('authStatus', authStatus))
   }
@@ -56,24 +59,14 @@ export class AuthService extends CacheService implements IAuthService {
   login(tenantCode: string, email: string, password: string): Observable<IAuthStatus> {
     this.logout()
     const signin = { "signin": { "tenant_code": tenantCode, "email": email, "password": password}} 
-    const loginResponse = this.api.post('signin', signin).pipe(
-      map(value => {
-        console.log(value)
-        this.setToken(value.access_token)
-        return decode(value.access_token) as IAuthStatus
-      }),
-      catchError(transformError)
-    )
-
-    loginResponse.subscribe(
-      res => {
-        this.authStatus.next(res)
-      },
-      err => {
-        this.logout()
-        return observableThrowError(err)
-      }
-    )
+    const loginResponse = this.http.post(this.signInUrl, JSON.stringify(signin), httpOptions)
+      .pipe(
+        map(value => {
+          this.setToken(value["access_token"])
+          return decode(value["access_token"]) as IAuthStatus
+        }),
+        catchError(transformHttpError)
+      )
 
     return loginResponse
   }

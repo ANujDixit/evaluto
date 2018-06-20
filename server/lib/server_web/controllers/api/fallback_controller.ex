@@ -16,7 +16,7 @@ defmodule ServerWeb.Api.FallbackController do
   def call(conn, {:error, {:unauthorized, msg: msg}}) do
     conn
     |> put_status(:unauthorized)
-    |> json(%{error: msg})
+    |> json(%{errors: msg})
   end
   
 end

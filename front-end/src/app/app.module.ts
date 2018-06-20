@@ -17,7 +17,6 @@ import { ApiService } from './api/api.service';
 import { LoginComponent } from './login/login.component';
 import { SimpleDialogComponent, UiService } from './common/ui.service';
 import { HttpHeaderInterceptor } from './api/http-header-interceptor';
-import { HttpErrorInterceptor } from './api/http-error-interceptor';
 import { MatSnackBarModule }  from '@angular/material/snack-bar';
 
 @NgModule({
@@ -48,11 +47,6 @@ import { MatSnackBarModule }  from '@angular/material/snack-bar';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpHeaderInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
       multi: true,
     }
   ],
