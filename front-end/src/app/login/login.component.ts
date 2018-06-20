@@ -60,6 +60,8 @@ export class LoginComponent implements OnInit {
     switch (role) {
       case Role.Admin:
         return '/admin'
+      case Role.Owner:
+        return '/admin'  
       default:
         return '/user/profile'
     }

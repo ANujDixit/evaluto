@@ -12,11 +12,16 @@ defmodule ServerWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
+  
+  if Mix.env == :dev do
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
+  end
 
   scope "/", ServerWeb do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/verify-tenants", RegistrationController, :verify_tenant
     
   end
 

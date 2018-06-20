@@ -56,3 +56,7 @@ config :server, Server.Repo,
   database: "server_dev",
   hostname: "localhost",
   pool_size: 10
+  
+#configure Bamboo
+config :server, Server.Notifications.Mailer,
+  adapter: Bamboo.LocalAdapter

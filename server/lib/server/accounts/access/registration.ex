@@ -17,17 +17,17 @@ defmodule Server.Accounts.Access.Registration do
         Repo.transaction(fn ->
           with {:ok, tenant}  <- Accounts.create_tenant(%{name: params["tenant_name"]}),
                {:ok, group} <- Accounts.create_group(tenant, %{name: "Admin"}),
-               {:ok, user} <- Accounts.create_user(tenant, %{first_name: params["first_name"], last_name: params["last_name"], username: params["email"],  role: "Owner"}),
+               {:ok, user} <- Accounts.create_user(tenant, %{first_name: params["first_name"], last_name: params["last_name"], username: params["email"],  role: "owner"}),
                {:ok, credential}  <- Accounts.create_credential(tenant, user, %{mode: "email", email: params["email"], password: params["password"]}),
                {:ok, _user_group} <- Accounts.create_user_group(tenant, user, group)
           do
-            tenant #|> Repo.preload([:users])
+            {tenant, user}
           else
            val -> Repo.rollback(val)
           end
         end)
         |> case do
-          {:ok, tenant} -> {:ok, tenant}
+          {:ok, {tenant, user}} -> {:ok, tenant, user}
           {:error, error} -> error
         end
       end

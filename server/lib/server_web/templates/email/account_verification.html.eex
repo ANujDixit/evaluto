@@ -1,0 +1,13 @@
+<div class="card"> 
+  <div class="container">   
+    <p>Hello <%= String.capitalize(@first_name) %></p> 
+    <p>Follow this link to verify your email account. Also please make note of your company code
+      <span class="font-weight-bold"><%= @tenant_code %></span>, you will require this for accessing your account.
+    </p>
+    <a href= <%= @verification_url %>><%= @verification_url %></a>
+    <br><br>
+    <p> If you didn't ask to verify this address, you can ignore this email</p>
+    <p>Thanks,</p>
+    <p>Evaluto Team</p>
+  </div>
+</div>
