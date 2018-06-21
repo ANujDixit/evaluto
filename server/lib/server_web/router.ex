@@ -30,6 +30,7 @@ defmodule ServerWeb.Router do
     
     post "/signin", AuthenticationController, :create 
     post "/signup", RegistrationController, :create
+    get "/tenants", RegistrationController, :show
    
   end
   

@@ -1,0 +1,72 @@
+<div fxLayout="row" fxLayoutAlign="center">
+  <mat-card fxFlex="600px">
+    <mat-card-header>
+      <mat-card-title>
+        <div class="mat-headline">Welcome to Evaluto!!</div>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="signUpForm" (ngSubmit)="signUp(signUpForm)" fxLayout="column">
+        
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <mat-icon>business</mat-icon>
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Company Name" aria-label="" formControlName="tenant_name">
+            <mat-error *ngIf="fcErr('tenant_name', 'required')">Company name required</mat-error>  
+            <mat-error *ngIf="fcErr('tenant_name', 'tenantNameExists', ['required'])">Company name already taken</mat-error> 
+          </mat-form-field>
+        </div>
+        
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <mat-icon>perm_identity</mat-icon>
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Enter your first name" formControlName="first_name">     
+            <mat-error *ngIf="fcErr('first_name', 'required')">First name required</mat-error>      
+          </mat-form-field>    
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Enter your last name" formControlName="last_name">    
+            <mat-error *ngIf="fcErr('last_name', 'required')">Last name required</mat-error>    
+          </mat-form-field>  
+        </div>
+        
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <mat-icon>email</mat-icon>
+          <mat-form-field fxFlex>
+            <input matInput placeholder="E-mail" aria-label="E-mail" formControlName="email">
+            <mat-error *ngIf="fcErr('email', 'required')">email required</mat-error>
+            <mat-error *ngIf="fcErr('email', 'email', ['required'])"> email is invalid</mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <mat-icon matPrefix>vpn_key</mat-icon>
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Enter your password" [type]="password_hide ? 'password' : 'text'" formControlName="password">
+            <mat-icon matSuffix (click)="password_hide = !password_hide">{{ password_hide ? 'visibility' : 'visibility_off' }}</mat-icon>       
+            <mat-error *ngIf="fcErr('password', 'required')">Password is required</mat-error>
+            <mat-error *ngIf="fcErr('password', 'minlength', ['required'])">Password needs to be at least 6 characters</mat-error>     
+            <mat-error *ngIf="fcErr('password', 'maxlength', ['required'])">Password should not be more than 25 characters</mat-error>  
+            <mat-error *ngIf="fcErr('password', 'pattern', ['required', 'minlength', 'maxlength'])">Invalid password pattern</mat-error> 
+          </mat-form-field>
+        </div>
+        
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <mat-icon matPrefix>vpn_key</mat-icon>
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Confirm password" [type]="confirm_password_hide ? 'password' : 'text'" formControlName="password_confirmation">
+            <mat-icon matSuffix (click)="confirm_password_hide = !confirm_password_hide">{{ confirm_password_hide ? 'visibility' : 'visibility_off' }}</mat-icon>       
+            <mat-error *ngIf="fcErr('password_confirmation', 'required')">Repeat Password is required</mat-error>
+            <mat-error *ngIf="fcErr('password_confirmation', 'no-match', ['required'])">Repeat Password does not match password</mat-error> 
+          </mat-form-field>
+        </div>
+        
+        <div fxLayout="row" class="margin-top">
+          <div *ngIf="signUpError" class="mat-caption error">{{signUpError}}</div>
+          <div class="flex-spacer"></div>
+          <button mat-raised-button type="submit" color="primary" [disabled]="signUpForm.invalid">SignUp</button>
+        </div>
+        
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -19,14 +19,22 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
   
-  get(url: string, params?: Object) {
-    if (params) {
-      let params = new HttpParams()
-      Object.keys(params).map(k => params.set(k, params[k]))
-      return this.http.get(`${this.baseUrl}/${url}`, { params: params })
+  get(url: string, data?: any): Observable<any> {
+    if (data) {
+      // const params = new HttpParams({fromObject: obj});
+      // let params = new HttpParams()
+      // Object.keys(obj).map(k => params.set(k, obj[k]))
+      
+      return this.http.get(`${this.baseUrl}/${url}`, { params: data })
+        .pipe(
+            map((res: HttpResponse<any>) => this.extractData(res))
+        );
      
     } else {
       return this.http.get(`${this.baseUrl}/${url}`)
+        .pipe(
+            map((res: HttpResponse<any>) => this.extractData(res))
+        );
     }
   }
   
@@ -39,10 +47,16 @@ export class ApiService {
   
   put(url: string, body: Object): Observable<any>  {
     return this.http.put(`${this.baseUrl}/${url}`, JSON.stringify(body), httpOptions)
+        .pipe(
+            map((res: HttpResponse<any>) => this.extractData(res))
+      );
   }
   
   delete(url: string): Observable<any>  {
-    return this.http.delete(`${this.baseUrl}/${url}`);
+    return this.http.delete(`${this.baseUrl}/${url}`)
+      .pipe(
+            map((res: HttpResponse<any>) => this.extractData(res))
+      );
   }
   
   private extractData(resp) {

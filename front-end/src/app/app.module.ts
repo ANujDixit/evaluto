@@ -19,6 +19,7 @@ import { SimpleDialogComponent, UiService } from './common/ui.service';
 import { HttpHeaderInterceptor } from './api/http-header-interceptor';
 import { HttpErrorInterceptor } from './api/http-error-interceptor';
 import { MatSnackBarModule }  from '@angular/material/snack-bar';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MatSnackBarModule }  from '@angular/material/snack-bar';
     HomeComponent,
     PageNotFoundComponent,
     LoginComponent,
-    SimpleDialogComponent
+    SimpleDialogComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

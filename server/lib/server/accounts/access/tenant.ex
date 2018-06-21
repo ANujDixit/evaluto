@@ -32,6 +32,11 @@ defmodule Server.Accounts.Access.Tenant do
         Tenant.changeset(tenant, %{})
       end
       
+      def get_tenant_by_name(name) do
+        Tenant
+        |> Repo.get_by(name: name)
+      end 
+      
       def get_tenant_by_code(code) do
         Tenant
         |> Repo.get_by(code: code)
