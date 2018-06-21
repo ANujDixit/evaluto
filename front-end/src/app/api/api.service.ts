@@ -33,8 +33,7 @@ export class ApiService {
   post(url: string, body: Object): Observable<any>  {
     return this.http.post(`${this.baseUrl}/${url}`, JSON.stringify(body), httpOptions)
       .pipe(
-            map((res: HttpResponse<any>) => this.extractData(res)),
-            catchError(transformHttpError)
+            map((res: HttpResponse<any>) => this.extractData(res))
       );
   }
   

@@ -44,14 +44,18 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (authStatus) => {
           if (authStatus.isAuthenticated) {
-            this.uiService.showToast(`Welcome! Role: ${authStatus.userRole}`)
+            this.uiService.showToast(`Welcome! Role: ${authStatus.userRole}`, 'Close')
             this.router.navigate([
               this.redirectUrl || this.homeRoutePerRole(authStatus.userRole),
             ])
           }
         }, 
-        (errors) => {
-          this.loginError = errors.errors;
+        (errMsg) => {
+          this.loginError = errMsg;
+          this.uiService.showToast(`Error: ${errMsg}`, 'Close', {
+              duration: 40000,
+              panelClass: "error-dialog",
+          });
         }
       )
   }
