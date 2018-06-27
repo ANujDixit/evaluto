@@ -11,9 +11,9 @@
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
           <mat-icon>business</mat-icon>
           <mat-form-field fxFlex>
-            <input matInput placeholder="Company Code" aria-label="" formControlName="tenantCode">
-            <mat-error *ngIf="loginForm.get('tenantCode').hasError('required')">Company Code is required</mat-error>
-            <mat-error *ngIf="loginForm.get('tenantCode').hasError('email')">Company Code is not valid</mat-error>
+            <input matInput placeholder="Company Code" aria-label="" formControlName="tenant_code">
+            <mat-error *ngIf="loginForm.get('tenant_code').hasError('required')">Company Code is required</mat-error>
+            <mat-error *ngIf="loginForm.get('tenant_code').hasError('email')">Company Code is not valid</mat-error>
           </mat-form-field>
         </div>
         

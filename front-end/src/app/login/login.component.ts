@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmailValidation, PasswordValidation, TenantCodeValidation	}	from	'../common/validations';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
-import { Role } from '../auth/role.enum';
+import { ApiService } from '../core/services/api.service';
+import { CacheService } from '../core/services/cache.service';
+import { Role } from '../shared/enums/role.enum';
 import { UiService } from '../common/ui.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
+    private api: ApiService,
+    private cache: CacheService,
     private router: Router,
     private route: ActivatedRoute,
     private uiService: UiService
@@ -32,32 +34,29 @@ export class LoginComponent implements OnInit {
   
   buildLoginForm() {
     this.loginForm = this.formBuilder.group({
-      tenantCode: ['', TenantCodeValidation],
+      tenant_code: ['', TenantCodeValidation],
       email: ['', EmailValidation],
       password: ['', PasswordValidation],
     })
   }
   
 	async login(submittedForm: FormGroup) {
-	  this.authService
-      .login(submittedForm.value.tenantCode, submittedForm.value.email, submittedForm.value.password)
+	  
+	 const signin = { "signin": submittedForm.value }  
+    
+    this.api.post('signin', signin)
       .subscribe(
-        (authStatus) => {
-          if (authStatus.isAuthenticated) {
-            this.uiService.showToast(`Welcome! Role: ${authStatus.userRole}`, 'Close')
-            this.router.navigate([
-              this.redirectUrl || this.homeRoutePerRole(authStatus.userRole),
-            ])
-          }
-        }, 
-        (errMsg) => {
+        resp => {  
+          this.uiService.showToast("You have successfully loggedin", 'Close')
+          this.cache.setToken(resp.jwt)
+          this.router.navigate([this.homeRoutePerRole(this.cache.getDecodedToken().userRole)])
+        },
+        errMsg => {
           this.loginError = errMsg;
-          this.uiService.showToast(`Error: ${errMsg}`, 'Close', {
-              duration: 40000,
-              panelClass: "error-dialog",
-          });
+          this.uiService.showToast(`Error: ${errMsg}`, 'Close', { duration: 40000, panelClass: "error-dialog"});
         }
-      )
+      );
+	  
   }
 
   homeRoutePerRole(role: Role) {

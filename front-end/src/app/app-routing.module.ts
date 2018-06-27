@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'login/:redirectUrl', component: LoginComponent },
+  { path: 'app', loadChildren: './auth/auth.module#AuthModule'},
   { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
   { path: 'user', loadChildren: './user/user.module#UserModule' },
   { path: '**', component: PageNotFoundComponent }

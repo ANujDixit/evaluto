@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmailValidation, TenantCodeValidation, PasswordValidation, PasswordConfirmationValidation, FirstNameValidation, LastNameValidation	}	from	'../common/validations';
 import { ExistingTenantNameValidation } from	'../common/async-validations';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { ApiService } from '../api/api.service';
+import { ApiService } from '../core/services/api.service';
 import { UiService } from '../common/ui.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private apiService: ApiService,
+    private api: ApiService,
     private router: Router,
     private route: ActivatedRoute,
     private uiService: UiService
@@ -32,13 +32,29 @@ export class SignUpComponent implements OnInit {
   
   buildSignUpForm() {
     this.signUpForm = this.formBuilder.group({
-      tenant_name: ['', TenantCodeValidation, [ExistingTenantNameValidation(this.apiService)] ],
+      tenant_name: ['', TenantCodeValidation, [ExistingTenantNameValidation(this.api)] ],
       email: ['', EmailValidation],
       first_name: ['', FirstNameValidation],
       last_name: ['', FirstNameValidation],
       password: ['', PasswordValidation],
       password_confirmation: ['', PasswordConfirmationValidation]
     })
+  }
+  
+  signUp(submittedForm) {
+    const signup = { "signup": submittedForm.value }  
+    
+    this.api.post('signup', signup)
+      .subscribe(
+        resp => {  
+          this.uiService.showToast(resp.message, 'Close')
+          this.router.navigate(['/login'])
+        },
+        errMsg => {
+          this.signUpError = errMsg;
+          this.uiService.showToast(`Error: ${errMsg}`, 'Close', { duration: 40000, panelClass: "error-dialog"});
+        }
+      );
   }
   
   fcErr(fc: string, ec: string, pre?: string[]): boolean {
