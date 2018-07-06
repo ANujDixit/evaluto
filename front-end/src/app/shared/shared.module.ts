@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SidenavListComponent } from './components/sidenav-list/sidenav-list.component';
+import { HeaderComponent } from './components/header/header.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     MaterialModule,
     FormsModule, 
     ReactiveFormsModule,
@@ -17,8 +22,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MaterialModule,
     FormsModule, 
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HeaderComponent, 
+    SidenavListComponent
   ],
-  declarations: []
+  declarations: [SidenavListComponent, HeaderComponent]
 })
 export class SharedModule { }

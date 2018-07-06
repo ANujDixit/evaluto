@@ -1,5 +1,16 @@
-<mat-toolbar color="accent">
-  <a mat-button routerLink="/admin/home" routerLinkActive="active-link">Admin's Dashboard</a>
-  <a mat-button routerLink="/admin/users" routerLinkActive="active-link">User Management</a>
-</mat-toolbar>
-<router-outlet></router-outlet>
+<div fxLayout="column">
+  <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+  <mat-sidenav-container fxLayout="row">
+    <mat-sidenav fxFlex #sidenav                      
+                      role="nagivation" mode="side" opened>
+      <app-sidenav-list  [isLoggedIn]="isLoggedIn" [sideNavListArray]="sideNavListArray"
+                         (logout)= "onLogOut()" >
+      </app-sidenav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlex fxLayout="column">  
+      <div class="content" fxFlex>
+        <router-outlet></router-outlet> 
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
