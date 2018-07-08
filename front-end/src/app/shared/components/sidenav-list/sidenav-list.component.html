@@ -1,6 +1,6 @@
-<mat-nav-list>
+<mat-nav-list class="side-nav">
   <a mat-list-item *ngFor="let item of sideNavListArray" routerLink={{item.link}}>
-    <mat-icon>{{item.icon}}</mat-icon>
+    <mat-icon class="nav-caption-icon">{{item.icon}}</mat-icon>
     <span class="nav-caption">{{item.title}}</span>
   </a>           
   <a [routerLink]="" mat-list-item (click)="onLogout()" *ngIf="isLoggedIn">

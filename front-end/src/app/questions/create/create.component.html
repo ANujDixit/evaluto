@@ -1,3 +1,60 @@
-<p>
-  create works!
-</p>
+<mat-card>
+  <form [formGroup]="questionForm" (ngSubmit)="create()">
+    <mat-card-title>Add Question</mat-card-title>
+    <mat-form-field>
+      <mat-select placeholder="Category">
+        <mat-option *ngFor="let category of categories" [value]="category.value">
+          {{category.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-card-content>  
+      <mat-form-field fxFill>
+        <textarea matInput placeholder="Question title" formControlName="title"></textarea>
+      </mat-form-field>
+      <div formArrayName="choices" fxFill>        
+        <div *ngFor="let choice of choiceForms.controls ; let i = index" [formGroupName]="i" fxLayoutAlign="start center">
+          <mat-checkbox formControlName="correct" fxFlex="5"></mat-checkbox>
+          <mat-form-field fxFlex>
+            <textarea matInput [placeholder]="'Choice ' + (i+1)" formControlName="title"></textarea>
+          </mat-form-field>
+          <button mat-button fxflex="5" type="button" color="warn" (click)="deleteChoice(i)">
+            <mat-icon>delete_outline</mat-icon>
+          </button> 
+        </div>  
+      </div>
+    </mat-card-content>
+    
+    <div fxLayoutAlign="end center">
+      <button mat-button type="button" color="primary" (click)="addChoice()">
+        <mat-icon>add_box</mat-icon>
+      </button> 
+    </div>
+   
+    <mat-form-field fxFill>
+      <textarea matInput placeholder="Explanation" formControlName="explanation"></textarea>
+    </mat-form-field>
+    
+    <div fxFill>
+      <mat-form-field>
+        <textarea matInput placeholder="Tag" formControlName="tags"></textarea>
+      </mat-form-field>
+      <button mat-button color="primary" [disabled]="questionForm.controls.tags.value==''" (click)="addTag()">ADD</button>
+    </div>
+
+    <mat-chip-list>
+      <mat-chip>Papadum</mat-chip>
+      <mat-chip>Naan</mat-chip>
+      <mat-chip>Dal</mat-chip>
+    </mat-chip-list>
+
+    <mat-card-actions fxLayoutAlign="end center">
+      <button mat-raised-button type="submit" fxFlex="10" color="primary" [disabled]="questionForm?.invalid">Submit</button>
+    </mat-card-actions>
+  </form>  
+</mat-card>
+
+
+
+
+

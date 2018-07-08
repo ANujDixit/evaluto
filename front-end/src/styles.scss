@@ -18,10 +18,6 @@ mat-sidenav {
     width: 250px;
 }
 
-.content {
-    padding: 12px
-}
-
 .margin-top {
   margin-top: 16px;
 }
@@ -37,6 +33,15 @@ mat-sidenav {
 
 .error {
   color: red;
+}
+
+.red-m {
+    border-style: solid;
+    border-color: red;
+}
+
+mat-sidenav {
+  background-color: #F2F2F2 !important;
 }
 
 
