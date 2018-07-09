@@ -11,7 +11,7 @@ defmodule Server.Repo.Migrations.CreateQuestion do
       
       add :tenant_id, references(:tenants, on_delete: :delete_all, type: :binary_id ), null: false
       add :created_by_id, references(:users, on_delete: :nothing, type: :binary_id ), null: false
-      add :updated_by_id, references(:users, on_delete: :nothing, type: :binary_id ), null: false
+      add :updated_by_id, references(:users, on_delete: :nothing, type: :binary_id )
 
       timestamps()
     end

@@ -34,7 +34,8 @@ export class CreateComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub = this.route.queryParams
       .subscribe(params => {
-        this.questionType = +params['type'];
+        //this.questionType = +params['type'];
+        this.questionType = 1;
         this.createForm();
       });
   }

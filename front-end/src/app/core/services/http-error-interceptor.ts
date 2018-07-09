@@ -4,7 +4,10 @@ import { Router } from '@angular/router'
 import { Observable, throwError  } from 'rxjs'
 import { catchError } from 'rxjs/operators'
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
+
 export class HttpErrorInterceptor implements HttpInterceptor {
   constructor() {}
   

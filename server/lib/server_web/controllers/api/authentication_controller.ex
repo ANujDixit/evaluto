@@ -14,7 +14,7 @@ defmodule ServerWeb.Api.AuthenticationController do
          %Credential{} = credential <- Accounts.get_credential_by_email(tenant, email),
          {:ok}  <- Auth.verify_password(password, credential.password_hash) 
     do    
-      case Guardian.encode_and_sign(credential.user, %{tenantId: tenant.id, userRole: credential.user.role, isAuthenticated: true}) do
+      case Guardian.encode_and_sign(credential.user, %{tenant_id: tenant.id, userRole: credential.user.role}) do
         {:ok, token, _claims} ->
           conn |> render("jwt.json", access_token: token)
         _ ->

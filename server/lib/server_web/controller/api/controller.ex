@@ -5,7 +5,7 @@ defmodule ServerWeb.Api.Controller do
         action_fallback ServerWeb.Api.FallbackController
         
         def action(conn, _params) do
-          apply(__MODULE__, action_name(conn), [conn, conn.params, Server.Guardian.Plug.current_resource(conn)])
+          apply(__MODULE__, action_name(conn), [conn, conn.params, Server.Auth.Guardian.Plug.current_resource(conn)])
         end
       end
     end

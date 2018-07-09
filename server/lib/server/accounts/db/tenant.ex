@@ -4,6 +4,7 @@ defmodule Server.Accounts.Tenant do
   
   alias Server.Accounts
   alias Server.Accounts.{User, Credential, Group, UserGroup}
+  alias Server.Quiz.{Question, Choice}
 
   schema "tenants" do
     field :name, :string
@@ -16,6 +17,9 @@ defmodule Server.Accounts.Tenant do
     has_many :credentials, Credential
     has_many :groups, Group
     has_many :users_groups, UserGroup
+    
+    has_many :questions, Question
+    has_many :choices, Choice
 
     timestamps()
   end

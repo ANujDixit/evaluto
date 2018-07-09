@@ -2,7 +2,7 @@ defmodule Server.Quiz.Choice do
   use Server.Schema
   alias Server.Quiz.Question
 
-  schema "question" do
+  schema "choices" do
     field :title, :string
     field :correct, :boolean, default: false
     field :seq, :integer

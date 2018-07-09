@@ -5,7 +5,10 @@ import { Observable, throwError} from 'rxjs'
 import { catchError } from 'rxjs/operators'
 import { CacheService } from './cache.service'
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
+
 export class HttpHeaderInterceptor implements HttpInterceptor {
   
   constructor(private cache: CacheService, 

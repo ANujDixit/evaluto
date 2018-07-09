@@ -18,6 +18,9 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 
+import { HttpHeaderInterceptor } from './core/services/http-header-interceptor';
+import { HttpErrorInterceptor } from './core/services/http-error-interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +45,11 @@ import { AuthModule } from './auth/auth.module';
   ],
   providers: [
     UiService,
+   
+    { provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+ 
+   
   ],
   bootstrap: [AppComponent]
 })
