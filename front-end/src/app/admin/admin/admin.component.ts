@@ -14,6 +14,7 @@ export class AdminComponent implements OnInit {
   sideNavListArray = [
                       {"icon": "dashboard", "title": "Dashboard", "link": "/admin/dashboard"},
                       {"icon": "question_answer", "title": "Questions", "link": "/admin/questions"},
+                      {"icon": "help", "title": "Categories", "link": "/admin/categories"},
                       {"icon": "help", "title": "Tests", "link": "/admin/tests"},
                       {"icon": "group_work", "title": "Groups", "link": "/admin/groups"},
                       {"icon": "supervised_user_circle", "title": "Members", "link": "/admin/members"},                 

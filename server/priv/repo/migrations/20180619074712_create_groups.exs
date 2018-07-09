@@ -12,6 +12,6 @@ defmodule Server.Repo.Migrations.CreateGroups do
     end
 
     create index(:groups, [:tenant_id])
-    create unique_index(:groups, [:tenant_id, :name], name: :tenant_name)
+    create unique_index(:groups, [:tenant_id, :name], name: :tenant_group_name)
   end
 end

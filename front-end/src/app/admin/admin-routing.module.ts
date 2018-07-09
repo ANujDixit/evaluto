@@ -15,6 +15,8 @@ import { ListComponent as UsersListComponent} from '../users/list/list.component
 import { ViewComponent as UsersViewComponent } from '../users/view/view.component';
 import { EditComponent as UsersEditComponent } from '../users/edit/edit.component';
 
+import { HomeComponent as CategoriesHomeComponent } from '../categories/home/home.component';
+
 const routes: Routes = [
   {
     path: '', component: AdminComponent, 
@@ -39,6 +41,9 @@ const routes: Routes = [
           {path: ':userId/edit', component: UsersEditComponent}
         ]
       },
+      { path: 'categories', 
+        component: CategoriesHomeComponent
+      }  
     ]
   },
 ];

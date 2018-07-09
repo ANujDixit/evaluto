@@ -1,4 +1,4 @@
-defmodule Server.Repo.Migrations.CreateQuestion do
+defmodule Server.Repo.Migrations.CreateQuestions do
   use Ecto.Migration
 
   def change do

@@ -31,6 +31,8 @@ defmodule Server.Quiz.Access.Question do
 
       def update_question(resource, %Question{} = question, attrs) do
         question
+        |> Ecto.Changeset.change()
+        |> Ecto.Changeset.put_assoc(:updated_by_user, resource.user)
         |> Question.changeset(attrs, resource.tenant)
         |> Repo.update()
       end

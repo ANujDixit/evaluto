@@ -43,6 +43,7 @@ defmodule ServerWeb.Router do
     pipe_through [:api, :jwt_authenticated_admin]
     
     resources "/questions", QuestionController
+    resources "/categories", CategoryController
    
   end
   

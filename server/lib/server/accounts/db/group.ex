@@ -16,6 +16,6 @@ defmodule Server.Accounts.Group do
     group
     |> cast(attrs, [:name, :active])
     |> validate_required([:name])
-    |> unique_constraint(:name, name: :tenant_name)
+    |> unique_constraint(:name, name: :tenant_group_name)
   end
 end
