@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   categories: Category[];
   categoryForm: FormGroup;
   private sub: Subscription = new Subscription();
+  displayedColumns: string[] = ['position', 'name', 'actions'];
 
   constructor(private fb: FormBuilder,
               private api: ApiService,
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getCategories();
+    this.createForm();
   }
   
   ngOnDestroy() {
@@ -36,12 +38,13 @@ export class HomeComponent implements OnInit {
     })
   }
   
-  createCategory() {
+  create() {
     const category = { "category": this.categoryForm.value }  
     this.api.post('admin/categories', category)
       .subscribe(
         resp => {  
           this.uiService.showToast("Category Created Successfully", 'Close')
+          this.getCategories();
         },
         errMsg => {
           console.log(errMsg)
@@ -60,6 +63,14 @@ export class HomeComponent implements OnInit {
   
   resetForm() {
     this.categoryForm.reset();
+  }
+  
+  edit(id) {
+    console.log(id)
+  }
+  
+  delete(id) {
+    console.log(id)
   }
 
 }
