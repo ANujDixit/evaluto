@@ -1,4 +1,4 @@
-defmodule Server.Auth.AuthPipeline do
+defmodule Server.Auth.Guardian.AuthPipeline do
     use Guardian.Plug.Pipeline, otp_app: :server,
                                 module: Server.Auth.Guardian,
                                 error_handler: Server.Auth.AuthErrorHandler

@@ -17,6 +17,13 @@ defmodule Server.Accounts.Access.User do
         |> where([u], u.tenant_id == ^tenant.id)
         |> Repo.get!(id)
       end 
+      
+      def load_user!(tenant_id, id) do
+        User
+        |> where([u], u.tenant_id == ^tenant_id)
+        |> Repo.get!(id)
+        |> Repo.preload(:tenant)
+      end 
     
       def create_user(tenant, attrs \\ %{}) do
         Ecto.build_assoc(tenant, :users)

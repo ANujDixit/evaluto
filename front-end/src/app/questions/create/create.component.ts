@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../core/services/api.service';
 import { LoadingService } from '../../core/services/loading.service';
 import { Subscription } from 'rxjs';
+import { UiService } from '../../common/ui.service';
 
 @Component({
   selector: 'app-create',
@@ -27,7 +28,8 @@ export class CreateComponent implements OnInit, OnDestroy {
               private api: ApiService,
               private router: Router,
               private loadingService: LoadingService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private uiService: UiService) { }
 
   ngOnInit() {
     this.sub = this.route.queryParams
@@ -79,7 +81,15 @@ export class CreateComponent implements OnInit, OnDestroy {
   
   create() {
     const question = { "question": this.questionForm.value }  
-   
+    this.api.post('admin/questions', question)
+      .subscribe(
+        resp => {  
+          this.uiService.showToast("Question Created Successfully", 'Close')
+        },
+        errMsg => {
+          console.log(errMsg)
+        }
+      );
   }
   
   addTag(){

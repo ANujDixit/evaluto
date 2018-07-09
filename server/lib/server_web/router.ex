@@ -13,6 +13,11 @@ defmodule ServerWeb.Router do
     plug :accepts, ["json"]
   end
   
+  pipeline :jwt_authenticated_admin do
+    plug Server.Auth.Guardian.AuthPipeline   
+    plug Server.Auth.EnsureAdmin
+  end
+  
   if Mix.env == :dev do
     forward "/sent_emails", Bamboo.SentEmailViewerPlug
   end
@@ -31,6 +36,13 @@ defmodule ServerWeb.Router do
     post "/signin", AuthenticationController, :create 
     post "/signup", RegistrationController, :create
     get "/tenants", RegistrationController, :show
+   
+  end
+  
+  scope "/api/admin", ServerWeb.Api.Admin, as: :api_admin do
+    pipe_through [:api, :jwt_authenticated_admin]
+    
+    resources "/questions", QuestionController
    
   end
   
