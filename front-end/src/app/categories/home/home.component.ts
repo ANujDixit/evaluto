@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
     this.api.post('admin/categories', category)
       .subscribe(
         resp => {  
+          this.resetForm();
           this.uiService.showToast("Category Created Successfully", 'Close')
           this.getCategories();
         },
@@ -69,8 +70,19 @@ export class HomeComponent implements OnInit {
     console.log(id)
   }
   
-  delete(id) {
-    console.log(id)
+  delete(id: string) {
+    if(confirm('Are you sure you want to delete it?')){
+      this.api.delete(`admin/categories/${id}`)
+        .subscribe(
+          resp => {  
+            this.uiService.showToast("Category Deleted Successfully", 'Close');
+            this.getCategories();
+          },
+          errMsg => {
+            console.log(errMsg)
+          }
+        );
+    }
   }
 
 }

@@ -34,7 +34,9 @@ defmodule ServerWeb.Api.Admin.CategoryController do
   def delete(conn, %{"id" => id}, resource) do
     category = Quiz.get_category!(resource, id)
     with {:ok, %Category{}} <- Quiz.delete_category(category) do
-      send_resp(conn, :no_content, "")
+      conn
+      |> put_status(:ok)
+      |> json(%{data: %{message: "Deleted Successfully"}})
     end
   end
 end
