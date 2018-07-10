@@ -5,7 +5,7 @@ defmodule ServerWeb.Api.Admin.CategoryController do
   alias Server.Quiz.Category
 
   def index(conn, _params, resource) do
-    categories = Quiz.list_categories(resource)
+    categories = Quiz.list_categories(resource) 
     render(conn, "index.json", categories: categories)
   end
 

@@ -6,6 +6,7 @@ defmodule Server.Repo.Migrations.CreateGroups do
       add :id, :binary_id, primary_key: true
       add :name, :string
       add :active, :boolean, default: true, null: false
+      add :user_count, :integer, default: 0
       add :tenant_id, references(:tenants, on_delete: :delete_all, type: :binary_id), null: false
 
       timestamps()

@@ -6,14 +6,21 @@ defmodule Server.Accounts.Access.Group do
       
       alias Server.Accounts.Group
 
-      def list_groups do
-        Repo.all(Group)
+      def list_groups(resource) do
+        Group
+        |> where([g], g.tenant_id == ^resource.tenant.id)
+        |> order_by(desc: :updated_at)
+        |> Repo.all()
       end
     
-      def get_group!(id), do: Repo.get!(Group, id)
+      def get_group!(resource, id) do 
+        Group
+        |> where([g], g.tenant_id == ^resource.tenant.id)
+        |> Repo.get!(id)
+      end  
     
-      def create_group(tenant, attrs \\ %{}) do
-        Ecto.build_assoc(tenant, :groups)
+      def create_group(resource, attrs \\ %{}) do
+        Ecto.build_assoc(resource.tenant, :groups)
         |> Group.changeset(attrs)
         |> Repo.insert()
       end
@@ -27,9 +34,17 @@ defmodule Server.Accounts.Access.Group do
       def delete_group(%Group{} = group) do
         Repo.delete(group)
       end
-    
-      def change_group(%Group{} = group) do
-        Group.changeset(group, %{})
+      
+      def increment_user_count_by_n(%Group{} = group, n) when is_integer(n) do
+        group
+        |> Group.changeset(%{user_count: (group.user_count + n)})
+        |> Repo.update()
+      end
+      
+      def decrement_user_count_by_n(%Group{} = group, n) when is_integer(n) do
+        group
+        |> Group.changeset(%{user_count: (group.user_count - n)})
+        |> Repo.update()
       end
       
     end

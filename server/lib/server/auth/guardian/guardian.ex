@@ -16,9 +16,9 @@ defmodule Server.Auth.Guardian do
     tenant_id = claims["tenant_id"]
     
     resource = 
-      case Accounts.load_user!(tenant_id, user_id) do
+      case Accounts.load_user(tenant_id, user_id) do
+        nil -> nil
         %User{} = user -> %{user: user, tenant: user.tenant, role: String.to_atom(user.role)}
-        _  -> nil
       end
     
     {:ok, resource}

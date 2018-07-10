@@ -5,14 +5,21 @@ defmodule Server.Accounts.Access.Credential do
       alias Server.Repo
       alias Server.Accounts.Credential
 
-      def list_credentials do
-        Repo.all(Credential)
+      def list_credentials(resource) do
+        Credential
+        |> where([c], c.tenant_id == ^resource.tenant.id)
+        |> order_by(desc: :updated_at)
+        |> Repo.all()
       end
     
-      def get_credential!(id), do: Repo.get!(Credential, id)
+      def get_credential!(resource, id) do
+        Credential
+        |> where([c], c.tenant_id == ^resource.tenant.id)
+        |> Repo.get!(id)
+      end  
     
-      def create_credential(tenant, user, attrs \\ %{}) do
-        Ecto.build_assoc(tenant, :credentials)
+      def create_credential(resource, user, attrs \\ %{}) do
+        Ecto.build_assoc(resource.tenant, :credentials)
         |> Ecto.Changeset.change()
         |> Ecto.Changeset.put_assoc(:user, user)
         |> Credential.changeset(attrs)
@@ -27,10 +34,6 @@ defmodule Server.Accounts.Access.Credential do
     
       def delete_credential(%Credential{} = credential) do
         Repo.delete(credential)
-      end
-    
-      def change_credential(%Credential{} = credential) do
-        Credential.changeset(credential, %{})
       end
       
       def get_credential_by_email(tenant, email) do

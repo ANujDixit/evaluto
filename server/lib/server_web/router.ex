@@ -44,6 +44,7 @@ defmodule ServerWeb.Router do
     
     resources "/questions", QuestionController
     resources "/categories", CategoryController
+    resources "/groups", GroupController
    
   end
   

@@ -6,27 +6,28 @@ defmodule Server.Accounts.Access.User do
       
       alias Server.Accounts.User
 
-      def list_users do
-        Repo.all(User)
-      end
-    
-      def get_user!(id), do: Repo.get!(User, id)
-      
-      def get_user!(tenant, id) do
+      def list_users(resource) do
         User
-        |> where([u], u.tenant_id == ^tenant.id)
+        |> where([u], u.tenant_id == ^resource.tenant.id)
+        |> order_by(desc: :updated_at)
+        |> Repo.all()
+      end
+      
+      def get_user!(resource, id) do
+        User
+        |> where([u], u.tenant_id == ^resource.tenant.id)
         |> Repo.get!(id)
       end 
       
-      def load_user!(tenant_id, id) do
+      def load_user(tenant_id, id) do
         User
         |> where([u], u.tenant_id == ^tenant_id)
-        |> Repo.get!(id)
+        |> Repo.get(id)
         |> Repo.preload(:tenant)
       end 
     
-      def create_user(tenant, attrs \\ %{}) do
-        Ecto.build_assoc(tenant, :users)
+      def create_user(resource, attrs \\ %{}) do
+        Ecto.build_assoc(resource.tenant, :users)
         |> User.changeset(attrs)
         |> Repo.insert()
       end
@@ -39,10 +40,6 @@ defmodule Server.Accounts.Access.User do
     
       def delete_user(%User{} = user) do
         Repo.delete(user)
-      end
-    
-      def change_user(%User{} = user) do
-        User.changeset(user, %{})
       end
       
     end
