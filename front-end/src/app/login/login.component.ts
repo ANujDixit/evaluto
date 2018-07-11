@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
         resp => {  
           this.uiService.showToast("You have successfully loggedin", 'Close')
           this.cache.setToken(resp.jwt)
+          console.log(this.cache.getDecodedToken())
           this.router.navigate([this.homeRoutePerRole(this.cache.getDecodedToken().userRole)])
         },
         errMsg => {

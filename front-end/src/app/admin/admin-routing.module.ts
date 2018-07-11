@@ -16,6 +16,7 @@ import { ViewComponent as UsersViewComponent } from '../users/view/view.componen
 import { EditComponent as UsersEditComponent } from '../users/edit/edit.component';
 
 import { HomeComponent as CategoriesHomeComponent } from '../categories/home/home.component';
+import { HomeComponent as GroupsHomeComponent } from '../groups/home/home.component';
 
 const routes: Routes = [
   {
@@ -43,7 +44,10 @@ const routes: Routes = [
       },
       { path: 'categories', 
         component: CategoriesHomeComponent
-      }  
+      },
+      { path: 'groups', 
+        component: GroupsHomeComponent
+      } 
     ]
   },
 ];

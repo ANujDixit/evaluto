@@ -1,0 +1,33 @@
+<mat-card class="content-container">
+  <mat-card-title>Groups</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-toolbar class="color-transparent" fxLayoutGap="20px">
+    <button mat-raised-button color="warn" (click)="openDialog()">
+      <mat-icon>add</mat-icon>New Group
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>expand_more</mat-icon>
+      Actions
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <span>Rename</span>
+      </button>
+      <button mat-menu-item>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+  <mat-divider></mat-divider>
+  <div fxLayout="row">
+    <div fxFlex="25">
+      <form class="mt-15">
+        <mat-form-field fxFill>
+          <mat-icon matPrefix>search</mat-icon>
+          <input type="text" matInput placeholder="Search Group by Name">
+        </mat-form-field>
+      </form>
+    </div>
+    <div fxFlex="75">fjldj</div>
+  </div>
+</mat-card>  

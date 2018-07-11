@@ -45,11 +45,8 @@ import { HttpErrorInterceptor } from './core/services/http-error-interceptor';
   ],
   providers: [
     UiService,
-   
     { provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
- 
-   
   ],
   bootstrap: [AppComponent]
 })

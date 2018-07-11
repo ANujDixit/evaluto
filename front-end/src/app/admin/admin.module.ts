@@ -6,6 +6,7 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { QuestionsModule } from '../questions/questions.module';
 import { UsersModule } from '../users/users.module';
 import { CategoriesModule } from '../categories/categories.module';
+import { GroupsModule } from '../groups/groups.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { CategoriesModule } from '../categories/categories.module';
     QuestionsModule,
     UsersModule,
     CategoriesModule,
+    GroupsModule,
   ],
   declarations: [AdminComponent, AdminHomeComponent]
 })
