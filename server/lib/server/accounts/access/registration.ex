@@ -16,10 +16,17 @@ defmodule Server.Accounts.Access.Registration do
       def create_tenant_with_admin_user(params) do
         Repo.transaction(fn ->
           with {:ok, tenant}  <- Accounts.create_tenant(%{name: params["tenant_name"]}),
-               {:ok, group} <- Accounts.create_group(%{tenant: tenant}, %{name: "Owner"}),
-               {:ok, user} <- Accounts.create_user(%{tenant: tenant}, %{first_name: params["first_name"], last_name: params["last_name"], username: params["email"],  role: "admin"}),
+               {:ok, group}   <- Accounts.create_group(%{tenant: tenant}, %{name: "Owner"}),
+                                                       
+               {:ok, user}    <- Accounts.create_user(%{tenant: tenant}, 
+                                                      %{first_name: params["first_name"], 
+                                                        last_name: params["last_name"], 
+                                                        username: params["email"],  
+                                                        role: "admin"}),
                {:ok, credential}  <- Accounts.create_credential(%{tenant: tenant}, user,
-                                                                %{mode: "email", email: params["email"], password: params["password"]}),
+                                                                %{mode: "email", 
+                                                                email: params["email"], 
+                                                                password: params["password"]}),
                {:ok, _user_group} <- create_user_group_and_update_user_count(%{tenant: tenant}, user, group)
           do
             {tenant, user}

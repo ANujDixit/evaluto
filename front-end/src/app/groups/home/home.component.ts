@@ -17,6 +17,7 @@ import { switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 export class HomeComponent implements OnInit, OnDestroy {
   
   groups: any;
+  group = {};
   private sub: Subscription = new Subscription();
   private sub1: Subscription = new Subscription();
   selection = new SelectionModel<Group>(true, []);
@@ -72,15 +73,21 @@ export class HomeComponent implements OnInit, OnDestroy {
       )
   }
   
-  openDialog(): void {
+  openDialog(group: Group): void {
     const dialogRef = this.dialog.open(CreateComponentDialog, {
-      width: '500px'
+      width: '500px',
+      data: group
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === "saved") {
-        this.getGroups();
         this.uiService.showToast("Group Created Successfully", 'Close');
+        this.getGroups();
+        
+      }
+      if (result === "edited") {
+        this.uiService.showToast("Group Edited Successfully", 'Close');
+        this.getGroups();
       }
     });
   }
