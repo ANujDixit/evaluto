@@ -18,6 +18,13 @@ export class CreateComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) data) { }
 
   ngOnInit() {
+    this.createForm()
+  }
+  
+  createForm(){
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+    })
   }
   
   onNoClick(): void {
@@ -25,11 +32,20 @@ export class CreateComponent implements OnInit {
   }
   
   save(){
-    
+    const group = { "group": this.form.value }  
+    this.api.post('admin/groups', group)
+      .subscribe(
+        resp => {  
+          this.dialogRef.close("saved");
+        },
+        errMsg => {
+          console.log(errMsg)
+        }
+      );
   }
   
   close(){
-    
+    this.dialogRef.close();
   }
 
 }

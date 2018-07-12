@@ -22,6 +22,14 @@ defmodule ServerWeb.Api.Admin.GroupController do
       |> render("show.json", group: group)
     end
   end
+  
+  def delete_all(conn, %{"_json" => ids}, resource) do
+    with {_n , nil} <- Accounts.delete_all_groups(ids) do
+      conn
+      |> put_status(:ok)
+      |> json(%{data: %{message: "Deleted Successfully"}})
+    end
+  end
 
   def show(conn, %{"id" => id}, resource) do
     group = Accounts.get_group!(resource, id)

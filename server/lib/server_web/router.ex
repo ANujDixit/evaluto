@@ -45,6 +45,8 @@ defmodule ServerWeb.Router do
     resources "/questions", QuestionController
     resources "/categories", CategoryController
     resources "/groups", GroupController
+    
+    post "/groups/delete_all", GroupController, :delete_all
    
   end
   

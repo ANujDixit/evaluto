@@ -13,7 +13,7 @@
       <button mat-menu-item>
         <span>Rename</span>
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="deleteSelection()">
         <span>Delete</span>
       </button>
     </mat-menu>
@@ -84,6 +84,7 @@
             (click)="selection.toggle(row)">
         </tr>
       </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
   </div>
 </mat-card>  

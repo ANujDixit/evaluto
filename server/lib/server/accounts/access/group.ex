@@ -43,6 +43,12 @@ defmodule Server.Accounts.Access.Group do
         Repo.delete(group)
       end
       
+      def delete_all_groups(ids) do
+        from(g in Group, 
+             where: g.id in ^ids) 
+        |> Repo.delete_all
+      end
+      
       def increment_user_count_by_n(%Group{} = group, n) when is_integer(n) do
         group
         |> Group.changeset(%{user_count: (group.user_count + n)})

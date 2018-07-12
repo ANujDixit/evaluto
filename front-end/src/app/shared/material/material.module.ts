@@ -15,6 +15,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 @NgModule({
   imports: [
     MatButtonModule,
@@ -32,7 +34,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatExpansionModule,
     MatTableModule,
     MatChipsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatPaginatorModule
   ],
   exports: [
     MatButtonModule,
@@ -50,7 +53,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatExpansionModule,
     MatTableModule,
     MatChipsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatPaginatorModule
   ],
 })
 export class MaterialModule { }
