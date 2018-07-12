@@ -12,6 +12,14 @@ defmodule Server.Accounts.Access.Group do
         |> order_by(desc: :updated_at)
         |> Repo.all()
       end
+      
+      def list_groups(resource, search_key) do
+        Group
+        |> where([g], g.tenant_id == ^resource.tenant.id)
+        |> where([g], ilike(g.name, ^"%#{search_key}%")) 
+        |> order_by(desc: :updated_at)
+        |> Repo.all()
+      end
     
       def get_group!(resource, id) do 
         Group

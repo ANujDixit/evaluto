@@ -2,8 +2,8 @@ defmodule ServerWeb.Api.Admin.GroupView do
   use ServerWeb, :view
   alias ServerWeb.Api.Admin.GroupView
 
-  def render("index.json", %{categories: categories}) do
-    %{data: render_many(categories, GroupView, "group.json")}
+  def render("index.json", %{groups: groups}) do
+    %{data: render_many(groups, GroupView, "group.json")}
   end
 
   def render("show.json", %{group: group}) do

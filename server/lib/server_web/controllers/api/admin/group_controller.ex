@@ -3,6 +3,11 @@ defmodule ServerWeb.Api.Admin.GroupController do
 
   alias Server.Accounts
   alias Server.Accounts.Group
+  
+  def index(conn, %{"search" => search_key}, resource) do
+    groups = Accounts.list_groups(resource, search_key) 
+    render(conn, "index.json", groups: groups)
+  end
 
   def index(conn, _params, resource) do
     groups = Accounts.list_groups(resource) 

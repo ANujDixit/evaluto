@@ -1,10 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
+import { ApiService } from '../../core/services/api.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create',
@@ -12,15 +9,27 @@ export interface DialogData {
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
+  
+  form: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<CreateComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  constructor(private fb: FormBuilder,
+              private api: ApiService, 
+              public dialogRef: MatDialogRef<CreateComponent>,
+              @Inject(MAT_DIALOG_DATA) data) { }
 
   ngOnInit() {
   }
   
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  
+  save(){
+    
+  }
+  
+  close(){
+    
   }
 
 }
