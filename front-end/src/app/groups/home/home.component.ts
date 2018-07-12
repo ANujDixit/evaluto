@@ -103,9 +103,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     
     if (selectedIds.length < 1) {
       this.uiService.showToast("You have not made any selection", 'Close');
-      
     } else {
-      
       if(confirm('Are you sure you want to delete them?')){
         this.api.post('admin/groups/delete_all', selectedIds)
           .subscribe(
@@ -118,9 +116,22 @@ export class HomeComponent implements OnInit, OnDestroy {
             }
           );
       }
-      
     }
-   
+  }
+  
+  delete(id: string) {
+    if(confirm('Are you sure you want to delete it?')){
+      this.api.delete(`admin/groups/${id}`)
+        .subscribe(
+          resp => {  
+            this.uiService.showToast("Group Deleted Successfully", 'Close');
+            this.getGroups();
+          },
+          errMsg => {
+            console.log(errMsg)
+          }
+        );
+    }
   }
 
 }
