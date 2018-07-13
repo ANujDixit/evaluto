@@ -35,7 +35,9 @@ defmodule ServerWeb.Api.Admin.QuestionController do
     question = Quiz.get_question!(resource, id)
     
     with {:ok, %Question{}} <- Quiz.delete_question(question) do
-      send_resp(conn, :no_content, "")
+      conn
+      |> put_status(:ok)
+      |> json(%{data: %{message: "Deleted Successfully"}})
     end
   end
 end

@@ -1,16 +1,16 @@
-<div mat-dialog-content>
-  <mat-select [(ngModel)]="choosenQuestionType" placeholder="Choose Question Type">
+<h4 mat-dialog-title>Select Question Type</h4>
+<mat-dialog-content>
+  <mat-select [(ngModel)]="choosenQuestionType" placeholder="Question Type">
     <mat-option *ngFor="let questionType of questionTypes" [value]="questionType">
       {{ questionType }}
     </mat-option>
   </mat-select>
-</div>
-
-<div mat-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions>
   <button mat-button (click)="confirmSelection()" [disabled]="!choosenQuestionType" color="primary">
     Proceed
   </button>
   <button mat-button (click)="dialogRef.close()">
     Cancel
   </button>
-</div>
+</mat-dialog-actions>

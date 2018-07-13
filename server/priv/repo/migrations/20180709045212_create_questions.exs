@@ -6,8 +6,8 @@ defmodule Server.Repo.Migrations.CreateQuestions do
       add :id, :binary_id, primary_key: true
       add :type, :integer
       add :difficulty_level, :integer
-      add :title, :string
-      add :explanation, :string
+      add :title, :text
+      add :explanation, :text
       
       add :tenant_id, references(:tenants, on_delete: :delete_all, type: :binary_id ), null: false
       add :created_by_id, references(:users, on_delete: :nothing, type: :binary_id ), null: false

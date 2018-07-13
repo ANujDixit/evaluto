@@ -1,6 +1,6 @@
 <div fxLayout="column">
   <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
-  <mat-sidenav-container fxLayout="row">
+  <mat-sidenav-container fxLayout="row" fxLayout.sm="column">
     <mat-sidenav fxFlex #sidenav role="nagivation" mode="side" opened>
       <app-sidenav-list  [isLoggedIn]="isLoggedIn" [sideNavListArray]="sideNavListArray"
                          (logout)= "onLogOut()" >

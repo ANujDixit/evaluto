@@ -86,6 +86,7 @@ export class CreateComponent implements OnInit, OnDestroy {
       .subscribe(
         resp => {  
           this.uiService.showToast("Question Created Successfully", 'Close')
+          this.router.navigate([`/admin/questions/${resp.id}`]);
         },
         errMsg => {
           console.log(errMsg)
