@@ -27,6 +27,11 @@ export class CreateComponent implements OnInit {
     } 
   }
   
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+  
+  
   createForm(){
     this.form = this.fb.group({
       id: '',
@@ -43,10 +48,6 @@ export class CreateComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-  
-  ngOnDestroy() {
-    this.sub.unsubscribe();
   }
   
   create_or_edit() {

@@ -1,3 +1,46 @@
-<p>
-  list works!
-</p>
+<mat-card class="content-container">
+  <mat-card-title>Questions</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content> 
+    <div *ngIf="questions?.length == 0">
+      <p class="mp-10">No Questions</p>        
+    </div>
+    <mat-accordion> 
+      <mat-expansion-panel *ngFor="let question of questions; let i = index;" >
+        <mat-expansion-panel-header class="height-auto">
+          <mat-panel-title 
+            fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
+            <span class="mat-body-1">{{i + 1}})</span>
+            <p class="mat-body-1">{{question.title}}</p>
+          </mat-panel-title>
+          <mat-panel-description></mat-panel-description>      
+        </mat-expansion-panel-header>                     
+        <mat-list role="list">
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <button  mat-button 
+                type="button" color="primary" 
+                [routerLink]= "['/admin/questions', question.id]">
+              Show
+            </button>  
+            <button  mat-button 
+                type="button" color="primary" 
+                [routerLink]= "['/admin/questions', question.id, 'edit']">
+              Edit
+            </button>  
+            <button mat-button  color="warn" 
+                type="button" (click)="deleteQuestion(question.id)">
+                <mat-icon>delete</mat-icon>
+            </button> 
+          </div>
+          <mat-list-item role="listitem" 
+                fxFlex fxLayout="row" class="height-auto" fxLayoutAlign="start center" fxLayoutGap="1rem"
+                *ngFor="let choice of question.choices; let j = index;" >     
+            <span class="mat-body-1">{{numberToChar(j)}}.&nbsp;&nbsp;</span>
+            <p class="mat-body-1">{{choice.title}}</p> 
+            <mat-icon *ngIf="choice.is_correct" class="cs-green">done</mat-icon>  
+          </mat-list-item>      
+        </mat-list>
+      </mat-expansion-panel>  
+    </mat-accordion>     
+  </mat-card-content>
+</mat-card>  
