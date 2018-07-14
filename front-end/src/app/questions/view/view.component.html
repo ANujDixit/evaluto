@@ -1,3 +1,17 @@
-<p>
-  view works!
-</p>
+<mat-card class="content-container">
+  <div fxLayout="row" fxLayoutAlign="space-between start" >
+    <mat-card-title>Questions</mat-card-title>
+  </div>  
+  <mat-divider></mat-divider>
+  <mat-card-content class="mt-15">
+    <mat-toolbar class="mat-elevation-z4">
+      <h4>List of Questions</h4>
+    </mat-toolbar>
+  </mat-card-content>
+  <mat-action-row>
+    <button mat-button type="button" color="primary" 
+      [routerLink]= "['/admin/questions', question.id]">
+      Show
+    </button> 
+  </mat-action-row>
+</mat-card>  
