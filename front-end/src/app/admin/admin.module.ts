@@ -8,6 +8,7 @@ import { UsersModule } from '../users/users.module';
 import { CategoriesModule } from '../categories/categories.module';
 import { GroupsModule } from '../groups/groups.module';
 import { QuizModule } from '../quiz/quiz.module';
+import { UamModule } from '../uam/uam.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { QuizModule } from '../quiz/quiz.module';
     CategoriesModule,
     GroupsModule,
     QuizModule,
+    UamModule,
   ],
   declarations: [AdminComponent, AdminHomeComponent]
 })

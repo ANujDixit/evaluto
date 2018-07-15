@@ -19,6 +19,7 @@ const routes: Routes = [
       { path: '', redirectTo: '/admin/home', pathMatch: 'full' },
       { path: 'home', component: AdminHomeComponent },  
       { path: 'quiz', loadChildren: '../quiz/quiz.module#QuizModule'},
+      { path: 'uam', loadChildren: '../uam/uam.module#UamModule'},
 
       { path: 'users', 
         component: UsersHomeComponent,

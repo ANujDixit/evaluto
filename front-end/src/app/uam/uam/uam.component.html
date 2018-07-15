@@ -1,19 +1,18 @@
 <mat-toolbar class="toolbar-50" style="background-color: #B2DFDB !important"
              fxLayoutGap="20px"            
-             fxLayoutAlign="start stretch" >
+             fxLayoutAlign="start stretch" >      
     <button mat-button 
-            routerLink="/admin/quiz/home" 
+            routerLink="/admin/uam/users" 
             routerLinkActive="nav-subitem-active">
-            Dashboard
+            Users
     </button> 
     <button mat-button 
-            routerLink="/admin/quiz/questions" 
+            routerLink="/admin/uam/groups" 
             routerLinkActive="nav-subitem-active">
-            Question Bank
+            Groups
     </button>  
 </mat-toolbar>
 
 <div class="container">
     <router-outlet></router-outlet>
 </div>
-
