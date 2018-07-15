@@ -1,4 +1,4 @@
-<div fxLayout="column">
+<!-- <div fxLayout="column">
   <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
   <mat-sidenav-container fxLayout="row" fxLayout.sm="column">
     <mat-sidenav fxFlex #sidenav role="nagivation" mode="side" opened>
@@ -12,4 +12,22 @@
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
+</div> -->
+<mat-toolbar color="primary" fxLayoutAlign="stretch">
+  <button mat-button routerLink="/">
+    <h2 class="mat-h2">Evaluto</h2>
+  </button>   
+  <div fxLayout="row">     
+    <button mat-button routerLink="/admin/home" routerLinkActive="nav-item-active">home</button> 
+    <button mat-button 
+            routerLink="/admin/quiz/"
+            routerLinkActive="nav-item-active">
+            Quiz
+    </button>   
+  </div>
+</mat-toolbar>
+<div class="container">
+  <router-outlet></router-outlet>
 </div>
+
+

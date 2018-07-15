@@ -1,2 +1,22 @@
-<router-outlet></router-outlet>
+<mat-toolbar class="toolbar-50" fxLayoutGap="20px" fxLayoutAlign="start stretch" >
+    <button mat-button 
+            routerLink="/admin/quiz/questions" 
+            routerLinkActive="nav-subitem-active">
+            Questions
+    </button> 
+    <button mat-button 
+            routerLink="/admin/home" 
+            routerLinkActive="nav-item-active">
+            Import Questions
+    </button> 
+    <button mat-button 
+            routerLink="/admin/home" 
+            routerLinkActive="nav-item-active">
+            Subject
+    </button> 
+</mat-toolbar>
+
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
 

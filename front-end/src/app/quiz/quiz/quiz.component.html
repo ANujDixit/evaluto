@@ -1,0 +1,17 @@
+<mat-toolbar class="toolbar-50" fxLayoutGap="20px" fxLayoutAlign="start stretch" >
+    <button mat-button 
+            routerLink="/admin/quiz/home" 
+            routerLinkActive="nav-subitem-active">
+            Dashboard
+    </button> 
+    <button mat-button 
+            routerLink="/admin/quiz/questions" 
+            routerLinkActive="nav-subitem-active">
+            Question Bank
+    </button>  
+</mat-toolbar>
+
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
+

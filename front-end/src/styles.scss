@@ -15,7 +15,7 @@ html, body {
     margin: 0;
     width: 100%;
     height: 100%;
-    background-color: #EFEFEF;
+    background-color: #E0E0E0;
 }
 
 mat-sidenav-container, 
@@ -55,6 +55,8 @@ mat-sidenav {
 }
 
 .content-container {
+  margin: 16px;
+  padding: 16px;
   min-height: 100vh;
 }
 
@@ -91,3 +93,22 @@ mat-sidenav {
 .expand-auto {
   flex: 1 1 auto;
 }
+
+.toolbar-50 {
+  font-size: 16px !important;
+  height:  50px !important;
+  min-height: 50px !important;
+}
+
+.nav-item-active {
+  background-color: white !important;
+  color: #607D8B !important;
+  border-top: 10px solid #607D8B  !important;
+}
+
+.nav-subitem-active { 
+  color: #607D8B !important;
+  border-bottom: 5px solid #607D8B  !important;
+}
+
+
