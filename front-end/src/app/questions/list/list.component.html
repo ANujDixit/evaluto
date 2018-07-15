@@ -14,24 +14,22 @@
       <p class="mp-10">No Questions</p>        
     </div>
     <mat-accordion> 
-      <mat-expansion-panel *ngFor="let question of questions; let i = index;" >
+      <mat-expansion-panel *ngFor="let question of questions; let i = index;">
         <mat-expansion-panel-header>
           <mat-panel-title fxFlex="2">
             {{i + 1}})
           </mat-panel-title>
           <mat-panel-description fxFlex="98">
-            {{question.title}}
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        
-        <div fxLayout="row" *ngFor="let choice of question.choices; let j = index;" >
+            {{ (question.title.length>150)? (question.title | slice:0:150)+'..':(question.title) }}
+          </mat-panel-description>         
+        </mat-expansion-panel-header>     
+        <div fxLayout="row" *ngFor="let choice of question.choices; let j = index;" class="my-10">
           <div fxFlex="3">
             <mat-icon *ngIf="choice.correct" class="green">done</mat-icon>
           </div>
           <div fxFlex="3">{{numberToChar(j)}}</div>
           <div fxFlex="94">{{choice.title}}</div>
-        </div>
-        
+        </div>        
         <mat-action-row>
           <button mat-button type="button" color="primary" 
             [routerLink]= "['/admin/questions', question.id]">
