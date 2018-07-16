@@ -9,6 +9,26 @@ defmodule Server.Accounts.Access.UserGroup do
       def list_users_groups(resource) do
         Repo.all(UserGroup)
       end
+      
+      def list_group_users(resource, group_id) do
+          UserGroup
+          |> where([ug], ug.tenant_id == ^resource.tenant.id)
+          |> where([ug], ug.group_id == ^group_id)
+          |> order_by(desc: :updated_at)
+          |> Repo.all()
+          |> Repo.preload(:user)
+          |> Enum.map(fn x -> x.user end)
+      end
+      
+      def list_user_groups(resource, user_id) do
+          UserGroup
+          |> where([ug], ug.tenant_id == ^resource.tenant.id)
+          |> where([ug], ug.group_id == ^user_id)
+          |> order_by(desc: :updated_at)
+          |> Repo.all()
+          |> Repo.preload(:group)
+          |> Enum.map(fn x -> x.group end)
+      end
     
       def get_user_group!(resource, id) do
         UserGroup
