@@ -13,7 +13,8 @@ defmodule ServerWeb.Api.Admin.GroupView do
   def render("group.json", %{group: group}) do
     %{id: group.id,
       name: group.name,
-      user_count: group.user_count
+      description: group.description,
+      user_count: length(group.users) 
     }
   end
 end

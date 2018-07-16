@@ -25,21 +25,6 @@ defmodule Server.Accounts.Access.UserGroup do
           |> UserGroup.changeset(attrs)
           |> Repo.insert()
       end
-      
-      def create_user_group_and_update_user_count(resource, user, group, attrs \\ %{}) do
-        Ecto.Multi.new()
-        |> Ecto.Multi.run(:user_group, fn %{} -> 
-                                              create_user_group(resource, user, group, attrs) 
-                                       end)
-        |> Ecto.Multi.run(:group, fn %{} -> 
-                                      Accounts.increment_user_count_by_n(%Group{} = group, 1)
-                                  end)
-        |> Repo.transaction()
-        |> case do
-          {:ok, %{user_group: user_group}} -> {:ok, user_group}
-          {:error, _ ,_ ,_} -> {:error, {:user_count_change_failed, msg: "User count update failed"}}
-        end
-      end
     
       def update_user_group(%UserGroup{} = user_group, attrs) do
         user_group

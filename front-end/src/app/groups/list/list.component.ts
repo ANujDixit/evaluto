@@ -21,7 +21,7 @@ export class ListComponent implements OnInit, OnDestroy {
   private sub: Subscription = new Subscription();
   private sub1: Subscription = new Subscription();
   selection = new SelectionModel<Group>(true, []);
-  displayedColumns: string[] = ['select', 'position', 'name', 'actions', 'users'];
+  displayedColumns: string[] = ['select', 'position', 'name', 'description', 'users', 'actions' ];
   
   searchField: FormControl;
   searchForm: FormGroup;

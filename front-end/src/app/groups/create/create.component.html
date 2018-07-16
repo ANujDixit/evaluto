@@ -2,9 +2,10 @@
 
 <mat-dialog-content [formGroup]="form">
   <mat-form-field fxFill>
-      <input matInput        
-             placeholder="Name"
-             formControlName="name">
+    <input matInput placeholder="Name" formControlName="name">
+  </mat-form-field>
+  <mat-form-field fxFill>
+      <textarea matInput placeholder="Description" formControlName="description"></textarea>
   </mat-form-field>
 </mat-dialog-content>
 

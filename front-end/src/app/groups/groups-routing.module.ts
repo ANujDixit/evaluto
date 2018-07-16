@@ -5,6 +5,7 @@ import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { ViewComponent } from './view/view.component';
 import { EditComponent } from './edit/edit.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [{  
   path: '',
@@ -14,7 +15,8 @@ const routes: Routes = [{
     {path: 'list', component: ListComponent},
     {path: 'create', component: CreateComponent},
     {path: ':groupId', component: ViewComponent},
-    {path: ':groupId/edit', component: EditComponent}
+    {path: ':groupId/edit', component: EditComponent},
+    {path: ':groupId/users', component: UserListComponent},
   ],
   
 }];

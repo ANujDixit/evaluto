@@ -24,7 +24,7 @@ defmodule Server.Quiz.Access.Question do
       def create_question(resource, attrs \\ %{}) do
         Ecto.build_assoc(resource.tenant, :questions)
         |> Ecto.Changeset.change()
-        |> Ecto.Changeset.put_assoc(:created_by_user, resource.user)
+        |> Ecto.Changeset.put_assoc(:created_by_user, resource.current_user)
         |> Question.changeset(attrs, resource.tenant)
         |> Repo.insert()
       end
@@ -32,7 +32,7 @@ defmodule Server.Quiz.Access.Question do
       def update_question(resource, %Question{} = question, attrs) do
         question
         |> Ecto.Changeset.change()
-        |> Ecto.Changeset.put_assoc(:updated_by_user, resource.user)
+        |> Ecto.Changeset.put_assoc(:updated_by_user, resource.current_user)
         |> Question.changeset(attrs, resource.tenant)
         |> Repo.update()
       end

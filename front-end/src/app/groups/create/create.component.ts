@@ -4,6 +4,7 @@ import { ApiService } from '../../core/services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Group } from '../../shared/models/group.model';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -17,6 +18,7 @@ export class CreateComponent implements OnInit {
   
   constructor(private fb: FormBuilder,
               private api: ApiService, 
+              private router: Router,
               public dialogRef: MatDialogRef<CreateComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -36,13 +38,15 @@ export class CreateComponent implements OnInit {
     this.form = this.fb.group({
       id: '',
       name: ['', Validators.required],
+      description: ''
     })
   }
   
   setForm(group: Group){
     this.form.reset({
       id: group.id,
-      name: group.name
+      name: group.name,
+      description: group.description
     });
   }
 
@@ -60,6 +64,7 @@ export class CreateComponent implements OnInit {
       .subscribe(
         resp => {  
           this.dialogRef.close("saved");
+          this.router.navigate(['/admin/uam/groups/list']);
         },
         errMsg => {
           console.log(errMsg)
@@ -72,6 +77,7 @@ export class CreateComponent implements OnInit {
     this.api.put(`admin/groups/${this.data.id}`, group)
       .subscribe(resp => {        
         this.dialogRef.close("edited");
+        this.router.navigate(['/admin/uam/groups/list']);
       }, err => {                
         console.log(err)       
     });

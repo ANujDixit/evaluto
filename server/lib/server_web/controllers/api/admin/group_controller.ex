@@ -18,8 +18,7 @@ defmodule ServerWeb.Api.Admin.GroupController do
     with {:ok, %Group{} = group} <- Accounts.create_group(resource, group_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", api_admin_group_path(conn, :show, group))
-      |> render("show.json", group: group)
+      |> json(%{data: %{message: "Created Successfully"}})
     end
   end
   
@@ -40,7 +39,9 @@ defmodule ServerWeb.Api.Admin.GroupController do
     group = Accounts.get_group!(resource, id)
 
     with {:ok, %Group{} = group} <- Accounts.update_group(group, group_params) do
-      render(conn, "show.json", group: group)
+      conn
+      |> put_status(:ok)
+      |> json(%{data: %{message: "Updated Successfully"}})
     end
   end
 

@@ -6,7 +6,7 @@ defmodule Server.Accounts.Group do
   schema "groups" do
     field :active, :boolean, default: false
     field :name, :string
-    field :user_count, :integer, default: 0
+    field :description, :string
     
     belongs_to :tenant, Tenant, foreign_key: :tenant_id, type: :binary_id
     many_to_many :users, User, join_through: "users_groups"
@@ -16,7 +16,7 @@ defmodule Server.Accounts.Group do
 
   def changeset(group, attrs) do
     group
-    |> cast(attrs, [:name, :active, :user_count])
+    |> cast(attrs, [:name, :active, :description])
     |> validate_required([:name])
     |> unique_constraint(:name, name: :tenant_group_name)
   end

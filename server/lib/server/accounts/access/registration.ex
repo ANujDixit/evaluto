@@ -27,7 +27,7 @@ defmodule Server.Accounts.Access.Registration do
                                                                 %{mode: "email", 
                                                                 email: params["email"], 
                                                                 password: params["password"]}),
-               {:ok, _user_group} <- create_user_group_and_update_user_count(%{tenant: tenant}, user, group)
+               {:ok, _user_group} <- create_user_group(%{tenant: tenant}, user, group)
           do
             {tenant, user}
           else

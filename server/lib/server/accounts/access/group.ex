@@ -11,6 +11,7 @@ defmodule Server.Accounts.Access.Group do
         |> where([g], g.tenant_id == ^resource.tenant.id)
         |> order_by(desc: :updated_at)
         |> Repo.all()
+        |> Repo.preload(:users)
       end
       
       def list_groups(resource, search_key) do
@@ -19,6 +20,7 @@ defmodule Server.Accounts.Access.Group do
         |> where([g], ilike(g.name, ^"%#{search_key}%")) 
         |> order_by(desc: :updated_at)
         |> Repo.all()
+        |> Repo.preload(:users)
       end
     
       def get_group!(resource, id) do 
@@ -47,18 +49,6 @@ defmodule Server.Accounts.Access.Group do
         from(g in Group, 
              where: g.id in ^ids) 
         |> Repo.delete_all
-      end
-      
-      def increment_user_count_by_n(%Group{} = group, n) when is_integer(n) do
-        group
-        |> Group.changeset(%{user_count: (group.user_count + n)})
-        |> Repo.update()
-      end
-      
-      def decrement_user_count_by_n(%Group{} = group, n) when is_integer(n) do
-        group
-        |> Group.changeset(%{user_count: (group.user_count - n)})
-        |> Repo.update()
       end
       
     end

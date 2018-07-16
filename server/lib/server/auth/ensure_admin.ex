@@ -7,7 +7,7 @@ defmodule Server.Auth.EnsureAdmin do
   
     def call(conn, _opts) do      
       resource = Server.Auth.Guardian.Plug.current_resource(conn)
-      if resource && resource.tenant && resource.user && resource.role && resource.role == :admin do        
+      if resource && resource.tenant && resource.current_user && resource.role && resource.role == :admin do        
         conn        
       else      
         conn   

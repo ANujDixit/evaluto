@@ -7,13 +7,14 @@ import { CreateComponent as CreateComponentDialog} from './create/create.compone
 import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 import { ViewComponent } from './view/view.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   imports: [
     SharedModule,
     GroupsRoutingModule
   ],
-  declarations: [HomeComponent, CreateComponentDialog, EditComponent, ListComponent, ViewComponent],
+  declarations: [HomeComponent, CreateComponentDialog, EditComponent, ListComponent, ViewComponent, UserListComponent],
   entryComponents: [
     CreateComponentDialog
   ]
