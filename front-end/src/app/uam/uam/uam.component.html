@@ -1,16 +1,29 @@
-<mat-toolbar class="toolbar-50" style="background-color: #B2DFDB !important"
-             fxLayoutGap="20px"            
-             fxLayoutAlign="start stretch" >      
+<mat-toolbar class="toolbar-50" style="background-color: #B2DFDB !important"                
+             fxLayoutAlign="stretch" >   
     <button mat-button 
+            fxFlexOffset="23"
+            routerLink="/admin/uam/home" 
+            routerLinkActive="nav-subitem-active">
+            Dashboard
+    </button>      
+    <mat-divider [vertical]="true"></mat-divider>       
+    <button mat-button       
             routerLink="/admin/uam/users" 
             routerLinkActive="nav-subitem-active">
             Users
     </button> 
+    <mat-divider [vertical]="true"></mat-divider>
     <button mat-button 
             routerLink="/admin/uam/groups" 
             routerLinkActive="nav-subitem-active">
             Groups
     </button>  
+    <mat-divider [vertical]="true"></mat-divider>
+    <button mat-button 
+            routerLink="/admin/uam/groupsff" 
+            routerLinkActive="nav-subitem-active">
+            Import Data
+    </button> 
 </mat-toolbar>
 
 <div class="container">

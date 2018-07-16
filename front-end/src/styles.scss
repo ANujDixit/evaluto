@@ -46,8 +46,8 @@ mat-sidenav {
 }
 
 .red-m {
-    border-style: solid;
-    border-color: red;
+    border-style: solid !important;
+    border-color: red !important;
 }
 
 mat-sidenav {
@@ -109,6 +109,20 @@ mat-sidenav {
 .nav-subitem-active { 
   color: #607D8B !important;
   border-bottom: 5px solid #607D8B  !important;
+}
+
+.mx-10 {  
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.my-10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.bg-white {
+  background-color: white;
 }
 
 
