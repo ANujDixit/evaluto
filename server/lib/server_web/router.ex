@@ -48,7 +48,12 @@ defmodule ServerWeb.Router do
       resources "/users", GroupUserController
     end
     
+    resources "/users", UserController do
+      resources "/groups", UserGroupController
+    end
+    
     post "/groups/delete_all", GroupController, :delete_all
+    post "/users/delete_all", UserController, :delete_all
    
   end
   

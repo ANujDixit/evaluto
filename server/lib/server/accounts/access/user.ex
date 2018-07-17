@@ -11,6 +11,18 @@ defmodule Server.Accounts.Access.User do
         |> where([u], u.tenant_id == ^resource.tenant.id)
         |> order_by(desc: :updated_at)
         |> Repo.all()
+        |> Repo.preload(:groups)
+      end
+      
+      def list_users(resource, search_key) do
+        User
+        |> where([u], u.tenant_id == ^resource.tenant.id)
+        |> where([u], ilike(u.first_name, ^"%#{search_key}%")) 
+        |> or_where([u], ilike(u.last_name, ^"%#{search_key}%")) 
+        |> or_where([u], ilike(u.email, ^"%#{search_key}%")) 
+        |> order_by(desc: :updated_at)
+        |> Repo.all()
+        |> Repo.preload(:groups)
       end
       
       def get_user!(resource, id) do
@@ -40,6 +52,11 @@ defmodule Server.Accounts.Access.User do
     
       def delete_user(%User{} = user) do
         Repo.delete(user)
+      end
+      
+      def delete_all_users(ids) do
+        from(u in User, where: u.id in ^ids) 
+        |> Repo.delete_all
       end
       
     end

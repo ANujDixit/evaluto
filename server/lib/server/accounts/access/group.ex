@@ -46,8 +46,7 @@ defmodule Server.Accounts.Access.Group do
       end
       
       def delete_all_groups(ids) do
-        from(g in Group, 
-             where: g.id in ^ids) 
+        from(g in Group, where: g.id in ^ids) 
         |> Repo.delete_all
       end
       
