@@ -17,6 +17,7 @@ import { AddUsersComponent as AddUsersComponentDialog } from '../add-users/add-u
 export class UserListComponent implements OnInit, OnDestroy {
   
   users: any;
+  group: any;
   private sub: Subscription = new Subscription();
   searchField: FormControl;
   searchForm: FormGroup;
@@ -45,7 +46,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     ).subscribe(
         resp => {
           console.log(resp)
-          this.users = new MatTableDataSource<User>(resp as User[]);
+          this.users = new MatTableDataSource<User>(resp as User[]);          
           this.users.paginator = this.paginator;
         },  
         errMsg => console.log(errMsg) 

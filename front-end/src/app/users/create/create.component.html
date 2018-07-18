@@ -1,3 +1,30 @@
-<p>
-  create works!
-</p>
+<h2 mat-dialog-title>Create User</h2>
+
+<mat-dialog-content [formGroup]="form">
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="First Name" formControlName="first_name">
+    </mat-form-field>
+    <mat-form-field fxFlex>
+        <input matInput placeholder="Last Name" formControlName="last_name">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field fxFill>
+      <input matInput placeholder="Email" formControlName="username">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select formControlName="role">    
+      <mat-option value="admin">Admin</mat-option>
+      <mat-option value="instructor">Instructor</mat-option>
+      <mat-option value="participant">Participant</mat-option>    
+    </mat-select>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button"(click)="close()">Close</button>
+  <button class="mat-raised-button mat-accent" (click)="create_or_edit()">Save</button>
+</mat-dialog-actions>

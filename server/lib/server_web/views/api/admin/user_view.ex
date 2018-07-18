@@ -14,8 +14,9 @@ defmodule ServerWeb.Api.Admin.UserView do
     %{id: user.id,
       first_name: user.first_name,
       last_name: user.last_name,
-      email: user.username,
-      role: user.role
+      username: user.username,
+      role: user.role,
+      group_count: length(user.groups) 
     }
   end
 end
