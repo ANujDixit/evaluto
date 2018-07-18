@@ -94,7 +94,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddUsersComponentDialog, {
-      width: '500px'      
+      width: '1500px'      
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -14,14 +14,14 @@ import { switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
 
   users: any;
   user = {};
   private sub: Subscription = new Subscription();
   private sub1: Subscription = new Subscription();
   selection = new SelectionModel<User>(true, []);
-  displayedColumns: string[] = ['select', 'position', 'name', 'username', 'role',  'groups', 'actions' ];
+  displayedColumns: string[] = ['select', 'position', 'name', 'username', 'role', 'actions' ];
   
   searchField: FormControl;
   searchForm: FormGroup;
