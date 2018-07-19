@@ -9,7 +9,7 @@ defmodule ServerWeb.Api.Admin.GroupUserController do
     render(conn, "index.json", group_users: group_users)
   end
   
-  def create(conn, %{"group_id" => group_id, "id" => user_id}, resource) when group_id != ""  and user_id != "" do
+  def create(conn, %{"group_id" => group_id, "user_id" => user_id}, resource) when group_id != ""  and user_id != "" do
     with %Group{} = group <- Accounts.get_group!(resource, group_id),
          %User{} = user <- Accounts.get_user!(resource, user_id),
          {:ok, _} <- Accounts.create_user_group(resource, user, group)
@@ -18,6 +18,11 @@ defmodule ServerWeb.Api.Admin.GroupUserController do
       |> put_status(:created)
       |> json(%{data: %{message: "Created Successfully"}})
     end
+  end
+  
+  def create(conn, %{"group_id" => group_id, "user_ids" => user_ids}, resource) when group_id != ""  and is_list(user_ids) do
+   
+  
   end
   
   def delete(conn, %{"group_id" => group_id, "id" => user_id}, resource) when group_id != ""  and user_id != "" do

@@ -96,7 +96,7 @@ export class AddUsersComponent implements OnInit {
     if (selectedIds.length < 1) {
       this.uiService.showToast("You have not made any selection", 'Close');
     } else {
-      this.api.post('admin/users/delete_all', selectedIds)
+      this.api.post(`admin/groups/${this.group.id}/users`, {user_ids: selectedIds})
         .subscribe(
           resp => {  
             this.uiService.showToast("Users Added Successfully", 'Close');
@@ -110,7 +110,7 @@ export class AddUsersComponent implements OnInit {
   }
   
   addUser(id: string) {
-    this.api.post(`admin/groups/${this.group.id}/users/${id}`, {})
+    this.api.post(`admin/groups/${this.group.id}/users`, {user_id: id})
       .subscribe(
         resp => {  
           this.dialogRef.close("saved");
