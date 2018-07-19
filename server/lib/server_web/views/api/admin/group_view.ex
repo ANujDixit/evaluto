@@ -14,7 +14,18 @@ defmodule ServerWeb.Api.Admin.GroupView do
     %{id: group.id,
       name: group.name,
       description: group.description,
-      user_count: length(group.users) 
+      user_count: length(group.users),
+      users:  render_many(group.users, __MODULE__, "user.json", as: :user)
     }
   end
+  
+  def render("user.json", %{user: user}) do
+    %{id: user.id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      username: user.username,
+      role: user.role
+    }
+  end
+ 
 end

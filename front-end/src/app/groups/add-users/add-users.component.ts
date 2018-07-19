@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, ViewChild  } from '@angular/core';
-import { MatDialog, MatDialogRef, MatPaginator, MatTableDataSource  } from '@angular/material';
+import { Component, OnInit, OnDestroy, ViewChild, Inject  } from '@angular/core';
+import { MatDialog, MatDialogRef, MatPaginator, MatTableDataSource, MAT_DIALOG_DATA  } from '@angular/material';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../shared/models/user.model';
 import { Subscription } from 'rxjs';
@@ -7,6 +7,7 @@ import { UiService } from '../../common/ui.service';
 import { ApiService } from '../../core/services/api.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-users',
@@ -16,6 +17,7 @@ import { switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 export class AddUsersComponent implements OnInit {
 
   users: any;
+  group: any;
   private sub: Subscription = new Subscription();
   private sub1: Subscription = new Subscription();
   selection = new SelectionModel<User>(true, []);
@@ -29,13 +31,18 @@ export class AddUsersComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private api: ApiService,
               private fb: FormBuilder,
-              private uiService: UiService) { 
+              private uiService: UiService,
+              private router: Router,
+              public dialogRef: MatDialogRef<AddUsersComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { 
                 
     this.searchField = new FormControl();
     this.searchForm = this.fb.group({searchField: this.searchField});  
+    this.group = this.data.group;
   }
   
   ngOnInit() {
+  
    this.getUsers();
    this.getSearchedUsers();
   }
@@ -44,6 +51,7 @@ export class AddUsersComponent implements OnInit {
     this.sub.unsubscribe();
     this.sub1.unsubscribe();
   }
+ 
   
   getUsers() {
     this.sub = this.api.get('admin/users')
@@ -102,11 +110,11 @@ export class AddUsersComponent implements OnInit {
   }
   
   addUser(id: string) {
-    this.api.delete(`admin/users/${id}`)
+    this.api.post(`admin/groups/${this.group.id}/users/${id}`, {})
       .subscribe(
         resp => {  
-          this.uiService.showToast("User Deleted Successfully", 'Close');
-          this.getUsers();
+          this.dialogRef.close("saved");
+          this.router.navigate([`/admin/uam/groups/${this.group.id}/users`]);
         },
         errMsg => {
           console.log(errMsg)

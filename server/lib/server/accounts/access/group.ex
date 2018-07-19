@@ -4,14 +4,14 @@ defmodule Server.Accounts.Access.Group do
       import Ecto.Query, warn: false
       alias Server.Repo
       
-      alias Server.Accounts.Group
+      alias Server.Accounts.{Group, User}
 
       def list_groups(resource) do
         Group
         |> where([g], g.tenant_id == ^resource.tenant.id)
         |> order_by(desc: :updated_at)
         |> Repo.all()
-        |> Repo.preload(:users)
+        |> Repo.preload([users: (from u in User, order_by: [desc: u.updated_at])])
       end
       
       def list_groups(resource, search_key) do
@@ -20,13 +20,14 @@ defmodule Server.Accounts.Access.Group do
         |> where([g], ilike(g.name, ^"%#{search_key}%")) 
         |> order_by(desc: :updated_at)
         |> Repo.all()
-        |> Repo.preload(:users)
+        |> Repo.preload([users: (from u in User, order_by: [desc: u.updated_at])])
       end
     
       def get_group!(resource, id) do 
         Group
         |> where([g], g.tenant_id == ^resource.tenant.id)
         |> Repo.get!(id)
+        |> Repo.preload([users: (from u in User, order_by: [desc: u.updated_at])])
       end  
     
       def create_group(resource, attrs \\ %{}) do

@@ -78,7 +78,6 @@ export class ListComponent implements OnInit, OnDestroy {
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
         this.selection.clear() :

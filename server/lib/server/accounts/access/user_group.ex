@@ -30,10 +30,13 @@ defmodule Server.Accounts.Access.UserGroup do
           |> Enum.map(fn x -> x.group end)
       end
     
-      def get_user_group!(resource, id) do
+      def get_user_group!(resource, user_id, group_id) do
         UserGroup
         |> where([ug], ug.tenant_id == ^resource.tenant.id)
-        |> Repo.get!(id)
+        |> where([ug], ug.user_id == ^user_id)
+        |> where([ug], ug.group_id == ^group_id)
+        |> Repo.all()
+        |> Enum.at(0)
       end  
     
       def create_user_group(resource, user, group, attrs \\ %{}) do

@@ -19,10 +19,11 @@ export class UserListComponent implements OnInit, OnDestroy {
   users: any;
   group: any;
   private sub: Subscription = new Subscription();
+
   searchField: FormControl;
   searchForm: FormGroup;
   selection = new SelectionModel<User>(true, []);
-  displayedColumns: string[] = ['select', 'position', 'name', 'email', 'actions' ];
+  displayedColumns: string[] = ['select', 'position', 'name', 'username', 'actions' ];
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -36,17 +37,17 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-   this.getUsers();    
+   this.getGroup();  
   }
-
-  getUsers() {
+  
+  getGroup() {
     this.sub = this.route.params.pipe(
       map(params => params['groupId']),
-      switchMap(id => this.api.get(`admin/groups/${id}/users`))
+      switchMap(id => this.api.get(`admin/groups/${id}`))
     ).subscribe(
         resp => {
-          console.log(resp)
-          this.users = new MatTableDataSource<User>(resp as User[]);          
+          this.group = resp       
+          this.users = new MatTableDataSource<User>(resp.users as User[]);          
           this.users.paginator = this.paginator;
         },  
         errMsg => console.log(errMsg) 
@@ -55,6 +56,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   
   ngOnDestroy() {
     this.sub.unsubscribe();
+ 
   }
 
   deleteSelection(){
@@ -69,7 +71,7 @@ export class UserListComponent implements OnInit, OnDestroy {
           .subscribe(
             resp => {  
               this.uiService.showToast("User Removed Successfully", 'Close');
-              this.getUsers();
+              this.getGroup();
             },
             errMsg => {
               console.log(errMsg)
@@ -84,8 +86,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     const numRows = this.users.data.length;
     return numSelected === numRows;
   }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  
   masterToggle() {
     this.isAllSelected() ?
         this.selection.clear() :
@@ -94,18 +95,31 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddUsersComponentDialog, {
-      width: '1500px'      
+      width: '1500px',
+      data: { group: this.group }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === "saved") {
         this.uiService.showToast("User added to Group Successfully", 'Close');
-        this.getUsers();
-        
+        this.getGroup();
       }
     });
   }
   
-
+  removeUser(id: string) {
+    if(confirm('Are you sure you want to remove user from the group?')){
+      this.api.delete(`admin/groups/${this.group.id}/users/${id}`)
+        .subscribe(
+          resp => {  
+            this.uiService.showToast("User Remove Successfully", 'Close');
+            this.getGroup();
+          },
+          errMsg => {
+            console.log(errMsg)
+          }
+        );
+    }
+  }
 
 }
