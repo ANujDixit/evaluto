@@ -1,51 +1,87 @@
-<!-- <mat-card class="content-container">
-  <div fxLayout="row" fxLayoutAlign="space-between start" >
-    <mat-card-title>Questions</mat-card-title>
-    <button mat-raised-button color="warn" (click)="addQuestion()">
-      <mat-icon>add</mat-icon>New Question
-    </button>
-  </div>  
-  <mat-divider></mat-divider>
-  <mat-card-content class="mt-15">
-    <mat-toolbar class="mat-elevation-z4">
-      <h4>List of Questions</h4>
-    </mat-toolbar>
-    <div *ngIf="questions?.length == 0">
-      <p class="mp-10">No Questions</p>        
-    </div>
-    <mat-accordion> 
-      <mat-expansion-panel *ngFor="let question of questions; let i = index;">
-        <mat-expansion-panel-header>
-          <mat-panel-title fxFlex="2">
-            {{i + 1}})
-          </mat-panel-title>
-          <mat-panel-description fxFlex="98">
-            {{ (question.title.length>150)? (question.title | slice:0:150)+'..':(question.title) }}
-          </mat-panel-description>         
-        </mat-expansion-panel-header>     
-        <div fxLayout="row" *ngFor="let choice of question.choices; let j = index;" class="my-10">
-          <div fxFlex="3">
-            <mat-icon *ngIf="choice.correct" class="green">done</mat-icon>
-          </div>
-          <div fxFlex="3">{{numberToChar(j)}}</div>
-          <div fxFlex="94">{{choice.title}}</div>
-        </div>        
-        <mat-action-row>
-          <button mat-button type="button" color="primary" 
-            [routerLink]= "['/admin/questions', question.id]">
-            Show
-          </button>  
-          <button  mat-button type="button" color="primary" 
-            [routerLink]= "['/admin/questions', question.id, 'edit']">
-            Edit
-          </button>  
-          <button mat-button  color="warn" type="button" (click)="deleteQuestion(question.id)" >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-action-row>
-      </mat-expansion-panel>  
-    </mat-accordion>
-  </mat-card-content>
-</mat-card>   -->
+<!--<mat-card class="content-container">-->
+<!--  <div fxLayout="row" fxLayoutAlign="space-between start" >-->
+<!--    <mat-card-title>Questions</mat-card-title>-->
+<!--    <button mat-raised-button color="warn" (click)="addQuestion()">-->
+<!--      <mat-icon>add</mat-icon>New Question-->
+<!--    </button>-->
+<!--  </div>  -->
+<!--  <mat-divider></mat-divider>-->
+<!--  <mat-card-content class="mt-15">-->
+<!--    <mat-toolbar class="mat-elevation-z4">-->
+<!--      <h4>List of Questions</h4>-->
+<!--    </mat-toolbar>-->
+<!--    <div *ngIf="questions?.length == 0">-->
+<!--      <p class="mp-10">No Questions</p>        -->
+<!--    </div>-->
+<!--    <mat-accordion> -->
+<!--      <mat-expansion-panel *ngFor="let question of questions; let i = index;" #expansion >-->
+<!--        <mat-expansion-panel-header>-->
+<!--          <div fxLayout="row">-->
+<!--            <div fxFlex="2">{{i + 1}})</div>-->
+<!--            <div fxFlex="98" *ngIf="!expansion.expanded">-->
+<!--              {{ (question.title.length>150)? (question.title | slice:0:150)+'..':(question.title) }}-->
+<!--            </div>       -->
+<!--            <div fxFlex="98" *ngIf="expansion.expanded">-->
+<!--              {{ question.title }}-->
+<!--            </div>  -->
+<!--          </div>-->
+<!--        </mat-expansion-panel-header>     -->
+<!--        <div fxLayout="row" *ngFor="let choice of question.choices; let j = index;" class="my-10">-->
+<!--          <div fxFlex="3">-->
+<!--            <mat-icon *ngIf="choice.correct" class="green">done</mat-icon>-->
+<!--          </div>-->
+<!--          <div fxFlex="3">{{numberToChar(j)}}</div>-->
+<!--          <div fxFlex="94">{{choice.title}}</div>-->
+<!--        </div>        -->
+<!--        <mat-action-row>-->
+<!--          <button mat-button type="button" color="primary" -->
+<!--            [routerLink]= "['/admin/questions', question.id]">-->
+<!--            Show-->
+<!--          </button>  -->
+<!--          <button  mat-button type="button" color="primary" -->
+<!--            [routerLink]= "['/admin/questions', question.id, 'edit']">-->
+<!--            Edit-->
+<!--          </button>  -->
+<!--          <button mat-button  color="warn" type="button" (click)="deleteQuestion(question.id)" >-->
+<!--            <mat-icon>delete</mat-icon>-->
+<!--          </button>-->
+<!--        </mat-action-row>-->
+<!--      </mat-expansion-panel>  -->
+<!--    </mat-accordion>-->
+<!--  </mat-card-content>-->
+<!--</mat-card> -->
 
-dwnvknvnk
+<mat-card>
+  <mat-card-title>Questions</mat-card-title>
+  <mat-card-content fxLayout="row" fxLayoutWrap fxLayoutGap="10px">
+    <mat-card fxFlex="50" *ngFor="let question of questions; let i = index;">
+      <mat-card-header fxLayout="column">
+        <mat-card-title>Category</mat-card-title>
+        <div fxLayout="row">
+          <div fxFlex="10">{{i + 1}})</div>
+          <div fxFlex="90">{{ (question.title | truncateText:150) }}</div>
+        </div>
+      </mat-card-header>
+      
+      <mat-card-content>
+        
+        <mat-list dense> 
+          <mat-list-item *ngFor="let choice of question.choices; let j = index;">
+            <div fxFlex="10">
+              <mat-icon *ngIf="choice.correct" class="green">done</mat-icon>
+            </div>
+            <div fxFlex="10">{{numberToChar(j)}}</div>
+            <div fxFlex="80"> {{ (choice.title | truncateText:150) }}</div>
+          </mat-list-item>
+        </mat-list>
+        
+        <mat-chip-list>
+          <mat-chip>
+            Tag
+          </mat-chip>
+        </mat-chip-list>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>   
+</mat-card>
+

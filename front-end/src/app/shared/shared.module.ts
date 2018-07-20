@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SidenavListComponent } from './components/sidenav-list/sidenav-list.component';
 import { HeaderComponent } from './components/header/header.component';
+import { TruncateTextPipe } from './pipes/truncate-text.pipe';
 
 
 @NgModule({
@@ -24,8 +25,9 @@ import { HeaderComponent } from './components/header/header.component';
     ReactiveFormsModule,
     FlexLayoutModule,
     HeaderComponent, 
-    SidenavListComponent
+    SidenavListComponent,
+    TruncateTextPipe
   ],
-  declarations: [SidenavListComponent, HeaderComponent]
+  declarations: [SidenavListComponent, HeaderComponent, TruncateTextPipe]
 })
 export class SharedModule { }

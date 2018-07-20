@@ -38,6 +38,10 @@ export class ListComponent implements OnInit, OnDestroy {
     return String.fromCharCode(97 + i)
   }
   
+  openGroup(question) {
+    console.log(question.title)
+  }
+  
   addQuestion(): void {
     const dialog = this.dialog.open(QuestionTypesDialogComponent, { height: '200px', width: '300px'});
     dialog.afterClosed()

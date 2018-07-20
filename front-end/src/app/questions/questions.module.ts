@@ -14,7 +14,14 @@ import { QuestionTypesDialogComponent } from './question-types-dialog/question-t
     SharedModule,
     QuestionsRoutingModule
   ],
-  declarations: [HomeComponent, CreateComponent, EditComponent, ListComponent, ViewComponent, QuestionTypesDialogComponent],
+  declarations: [
+    HomeComponent, 
+    CreateComponent, 
+    EditComponent, 
+    ListComponent, 
+    ViewComponent, 
+    QuestionTypesDialogComponent
+  ],
   entryComponents: [
     QuestionTypesDialogComponent
   ]
