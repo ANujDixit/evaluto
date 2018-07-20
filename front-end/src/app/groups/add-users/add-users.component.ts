@@ -99,8 +99,8 @@ export class AddUsersComponent implements OnInit {
       this.api.post(`admin/groups/${this.group.id}/users`, {user_ids: selectedIds})
         .subscribe(
           resp => {  
-            this.uiService.showToast("Users Added Successfully", 'Close');
-            this.getUsers();
+            this.dialogRef.close("saved");
+            this.router.navigate([`/admin/uam/groups/${this.group.id}/users`]);
           },
           errMsg => {
             console.log(errMsg)

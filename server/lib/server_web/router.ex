@@ -46,6 +46,7 @@ defmodule ServerWeb.Router do
     resources "/categories", CategoryController
     resources "/groups", GroupController do
       resources "/users", GroupUserController, only: [:index, :delete, :create]
+      post "/users/delete_all", GroupUserController, :delete_all
     end
     
     resources "/users", UserController do

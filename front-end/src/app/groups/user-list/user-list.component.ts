@@ -59,7 +59,7 @@ export class UserListComponent implements OnInit, OnDestroy {
  
   }
 
-  deleteSelection(){
+  removeSelectedUsers(){
     const selectedIds = this.selection.selected.map(user => user.id);
     
     if (selectedIds.length < 1) {
@@ -67,10 +67,10 @@ export class UserListComponent implements OnInit, OnDestroy {
     } else {
       if(confirm('Are you sure you want to remove selected users from this group?')){
         const groupId = this.route.snapshot.params['groupId']
-        this.api.post(`admin/groups/${groupId}/users/delete_all`, selectedIds)
+        this.api.post(`admin/groups/${groupId}/users/delete_all`, {user_ids: selectedIds})
           .subscribe(
             resp => {  
-              this.uiService.showToast("User Removed Successfully", 'Close');
+              this.uiService.showToast("Users Removed Successfully", 'Close');
               this.getGroup();
             },
             errMsg => {

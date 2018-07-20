@@ -31,6 +31,13 @@ defmodule Server.Accounts.Access.User do
         |> Repo.get!(id)
       end 
       
+      def get_users_by_ids(resource, ids) do
+        User
+        |> where([u], u.tenant_id == ^resource.tenant.id)
+        |> where([u], u.id in ^ids)
+        |> Repo.all()
+      end 
+      
       def load_user(tenant_id, id) do
         User
         |> where([u], u.tenant_id == ^tenant_id)
@@ -42,12 +49,6 @@ defmodule Server.Accounts.Access.User do
         Ecto.build_assoc(resource.tenant, :users)
         |> User.changeset(attrs)
         |> Repo.insert()
-      end
-    
-      def update_user(%User{} = user, attrs) do
-        user
-        |> User.changeset(attrs)
-        |> Repo.update()
       end
     
       def delete_user(%User{} = user) do

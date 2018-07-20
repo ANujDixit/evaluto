@@ -21,8 +21,15 @@ defmodule ServerWeb.Api.Admin.GroupUserController do
   end
   
   def create(conn, %{"group_id" => group_id, "user_ids" => user_ids}, resource) when group_id != ""  and is_list(user_ids) do
-   
-  
+    with %Group{} = group <- Accounts.get_group!(resource, group_id),
+                    users <- Accounts.get_users_by_ids(resource, user_ids),
+         users_to_be_inserted <- users -- group.users,
+             {_n, _}  <- Accounts.add_multiple_users_to_group(resource, group, users_to_be_inserted) 
+    do
+      conn
+      |> put_status(:created)
+      |> json(%{data: %{message: "Multiple Users Added Successfully"}})
+    end
   end
   
   def delete(conn, %{"group_id" => group_id, "id" => user_id}, resource) when group_id != ""  and user_id != "" do
@@ -31,6 +38,16 @@ defmodule ServerWeb.Api.Admin.GroupUserController do
       conn
       |> put_status(:ok)
       |> json(%{data: %{message: "Deleted Successfully"}})
+    end
+  end
+  
+  def delete_all(conn, %{"group_id" => group_id, "user_ids" => user_ids}, resource) when group_id != ""  and is_list(user_ids) do
+    with %Group{} = group <- Accounts.get_group!(resource, group_id),
+                  {_n,_}   <- Accounts.remove_users_from_group(resource, group.id, user_ids)  
+    do
+      conn
+      |> put_status(:ok)
+      |> json(%{data: %{message: "Users removed successfully from group"}})
     end
   end
  
