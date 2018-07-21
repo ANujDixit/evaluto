@@ -51,12 +51,12 @@ export class ListComponent implements OnInit, OnDestroy {
     dialog.afterClosed()
       .subscribe(selection => {
         if (selection) {
-          switch(selection) { 
-             case "Single Choice": { 
+          switch(selection.selectedQuestionType + "|" + selection.selectedLayoutType ) { 
+             case "Single Choice|Text Only" : { 
                 this.router.navigate(['/admin/quiz/questions/create'], { queryParams: { type: '1'} });
                 break; 
              } 
-             case "Multiple Choice": { 
+             case "Multiple Choice|Text Only": { 
                 this.router.navigate(['/admin/quiz/questions/create'], { queryParams: { type: '2' } }); 
                 break; 
              } 

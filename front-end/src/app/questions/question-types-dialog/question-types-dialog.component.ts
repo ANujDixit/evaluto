@@ -9,8 +9,10 @@ import { MatDialogRef } from "@angular/material";
 export class QuestionTypesDialogComponent implements OnInit {
   
   questionTypes = ['Single Choice', 'Multiple Choice', 'True and False', 'Fill in the Blanks', 'Match the following']
-  
-  choosenQuestionType: string;
+  layoutTypes = ['Text Only', 'Both Text and Image']
+
+  choosenQuestionType: string = 'Single Choice';
+  choosenLayoutType: string = 'Text Only';
 
   constructor(public dialogRef: MatDialogRef<QuestionTypesDialogComponent>) { }
 
@@ -18,6 +20,7 @@ export class QuestionTypesDialogComponent implements OnInit {
   }
   
   confirmSelection() {
-    this.dialogRef.close(this.choosenQuestionType);
+    this.dialogRef.close({ selectedQuestionType: this.choosenQuestionType, 
+                           selectedLayoutType: this.choosenLayoutType});
   }
 }

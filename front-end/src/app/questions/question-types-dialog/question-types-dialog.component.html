@@ -3,20 +3,32 @@
     Select Question Type 
   </div>
   <div class="card-body">  
-    <mat-dialog-content>
-      <mat-select [(ngModel)]="choosenQuestionType" placeholder="Question Type">
-        <mat-option *ngFor="let questionType of questionTypes" [value]="questionType">
-          {{ questionType }}
-        </mat-option>
-      </mat-select>
-    </mat-dialog-content>
+    <mat-radio-group  [(ngModel)]="choosenQuestionType">
+      <mat-radio-button *ngFor="let questionType of questionTypes" 
+                        class="m-3"                                       
+                        [value]="questionType">
+                        {{ questionType }}
+      </mat-radio-button>
+    </mat-radio-group>  
+  </div>
+  <div class="card-header">
+    Select Layout
+  </div>
+  <div class="card-body">  
+    <mat-radio-group  [(ngModel)]="choosenLayoutType">
+      <mat-radio-button *ngFor="let layoutType of layoutTypes" 
+                        class="m-3"                                       
+                        [value]="layoutType">
+                        {{ layoutType }}
+      </mat-radio-button>
+    </mat-radio-group>  
   </div>
   <div class="card-footer">     
     <mat-dialog-actions class="m-0 p-0">       
       <button mat-button (click)="dialogRef.close()">
         Cancel
       </button>
-      <button mat-raised-button (click)="confirmSelection()" [disabled]="!choosenQuestionType" color="primary">
+      <button mat-raised-button (click)="confirmSelection()" color="primary">
         Proceed
       </button>
     </mat-dialog-actions>
