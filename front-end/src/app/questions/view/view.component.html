@@ -1,18 +1,23 @@
-<mat-card class="content-container">
-  <div fxLayout="row" fxLayoutAlign="space-between start" >
-    <mat-card-title>Questions</mat-card-title>
-  </div>  
-  <mat-divider></mat-divider>
-  <mat-card-content class="mt-15">
-    <mat-toolbar class="mat-elevation-z4">      
-      <p>{{ question.title }} </p>    
-    </mat-toolbar>
-    <
-  </mat-card-content>
-  <mat-action-row>
-    <button mat-button type="button" color="primary" 
-      [routerLink]= "['/admin/questions', question.id]">
-      Show
+<div class="card">
+  <h5 class="card-header">Question</h5>
+  <div class="card-body">
+    <p class="mb-3">{{ question?.title }}</p>
+    <div class="my-2" fxLayout="row" *ngFor="let choice of question?.choices; let i = index;">
+      <div fxFlex="3">
+          <mat-icon *ngIf="choice.correct" class="green">done</mat-icon>
+      </div>
+      <div fxFlex="2" class="small">{{numberToChar(i)}}</div>
+      <div fxFlex="95" class="small"> {{ choice.title }}</div>
+    </div>       
+  </div>
+  <div class="card-footer">
+    <button  mat-button type="button" color="primary" 
+      [routerLink]= "['/admin/quiz/questions', question.id, 'edit']">
+      Edit
     </button> 
-  </mat-action-row>
-</mat-card>  
+    <button  mat-button type="button" color="primary" 
+      [routerLink]= "['/admin/quiz/questions', question.id, 'edit']">
+      Edit
+    </button>    
+  </div>
+</div>

@@ -28,6 +28,10 @@ export class ListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
+
+  showQuestion(question) {
+    this.router.navigate([`/admin/quiz/questions/${question.id}`])
+  }
   
   fetchQuestions(){
     this.sub = this.api.get('admin/questions')
@@ -43,17 +47,17 @@ export class ListComponent implements OnInit, OnDestroy {
   }
   
   addQuestion(): void {
-    const dialog = this.dialog.open(QuestionTypesDialogComponent, { height: '200px', width: '300px'});
+    const dialog = this.dialog.open(QuestionTypesDialogComponent, { height: '500px', width: '800px'});
     dialog.afterClosed()
       .subscribe(selection => {
         if (selection) {
           switch(selection) { 
              case "Single Choice": { 
-                this.router.navigate(['/admin/questions/create'], { queryParams: { type: '1'} });
+                this.router.navigate(['/admin/quiz/questions/create'], { queryParams: { type: '1'} });
                 break; 
              } 
              case "Multiple Choice": { 
-                this.router.navigate(['/admin/questions/create'], { queryParams: { type: '2' } }); 
+                this.router.navigate(['/admin/quiz/questions/create'], { queryParams: { type: '2' } }); 
                 break; 
              } 
              case "C": {
@@ -77,17 +81,19 @@ export class ListComponent implements OnInit, OnDestroy {
   }
   
   deleteQuestion(id: string) {
-    this.api.delete(`admin/questions/${id}`)
-      .subscribe(
-        resp => {        
-          this.fetchQuestions();
-          this.uiService.showToast("Question Deleted Successfully", 'Close');
-          this.router.navigate(['/admin/questions']);
-        }, 
-        err => {                
-          console.log(err)       
-        }
-      );
+    if(confirm('Are you sure you want to delete this question?')){
+      this.api.delete(`admin/questions/${id}`)
+        .subscribe(
+          resp => {        
+            this.fetchQuestions();
+            this.uiService.showToast("Question Deleted Successfully", 'Close');
+            this.router.navigate(['/admin/quiz/questions']);
+          }, 
+          err => {                
+            console.log(err)       
+          }
+        );
+    } 
   }
 
 }

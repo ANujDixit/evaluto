@@ -1,16 +1,24 @@
-<h4 mat-dialog-title>Select Question Type</h4>
-<mat-dialog-content>
-  <mat-select [(ngModel)]="choosenQuestionType" placeholder="Question Type">
-    <mat-option *ngFor="let questionType of questionTypes" [value]="questionType">
-      {{ questionType }}
-    </mat-option>
-  </mat-select>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="confirmSelection()" [disabled]="!choosenQuestionType" color="primary">
-    Proceed
-  </button>
-  <button mat-button (click)="dialogRef.close()">
-    Cancel
-  </button>
-</mat-dialog-actions>
+<div class="card">
+  <div class="card-header">
+    Select Question Type 
+  </div>
+  <div class="card-body">  
+    <mat-dialog-content>
+      <mat-select [(ngModel)]="choosenQuestionType" placeholder="Question Type">
+        <mat-option *ngFor="let questionType of questionTypes" [value]="questionType">
+          {{ questionType }}
+        </mat-option>
+      </mat-select>
+    </mat-dialog-content>
+  </div>
+  <div class="card-footer">     
+    <mat-dialog-actions class="m-0 p-0">       
+      <button mat-button (click)="dialogRef.close()">
+        Cancel
+      </button>
+      <button mat-raised-button (click)="confirmSelection()" [disabled]="!choosenQuestionType" color="primary">
+        Proceed
+      </button>
+    </mat-dialog-actions>
+  </div> 
+</div>  

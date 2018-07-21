@@ -1,15 +1,20 @@
-<h2 mat-dialog-title>Create Group</h2>
+<div class="card">
+  <div class="card-header">
+    Create Group
+  </div>
+  <div class="card-body">
+    <mat-dialog-content [formGroup]="form">
+      <mat-form-field fxFill>
+        <input matInput placeholder="Name" formControlName="name">
+      </mat-form-field>
+      <mat-form-field fxFill>
+          <textarea matInput placeholder="Description" formControlName="description"></textarea>
+      </mat-form-field>
+    </mat-dialog-content>
 
-<mat-dialog-content [formGroup]="form">
-  <mat-form-field fxFill>
-    <input matInput placeholder="Name" formControlName="name">
-  </mat-form-field>
-  <mat-form-field fxFill>
-      <textarea matInput placeholder="Description" formControlName="description"></textarea>
-  </mat-form-field>
-</mat-dialog-content>
-
-<mat-dialog-actions>
-  <button class="mat-raised-button"(click)="close()">Close</button>
-  <button class="mat-raised-button mat-accent" (click)="create_or_edit()">Save</button>
-</mat-dialog-actions>
+    <mat-dialog-actions>
+      <button class="mat-raised-button"(click)="close()">Close</button>
+      <button class="mat-raised-button mat-accent" (click)="create_or_edit()">Save</button>
+    </mat-dialog-actions>
+  </div>  
+</div>

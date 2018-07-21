@@ -1,3 +1,5 @@
+@import "~bootstrap/scss/bootstrap";
+
 @import '~@angular/material/theming';
 @include mat-core();
 
@@ -28,15 +30,6 @@ mat-sidenav {
     width: 250px;
 }
 
-.margin-top {
-  margin-top: 16px;
-}
-
-.horizontal-padding {
-  margin-left: 16px;
-  margin-right: 16px;
-}
-
 .flex-spacer {  
   flex: 1 1 auto;
 }
@@ -54,40 +47,12 @@ mat-sidenav {
   background-color: #F2F2F2 !important;
 }
 
-.content-container {
-  margin: 16px;
-  padding: 16px;
-  min-height: 100vh;
-}
-
-.mt-5 {
-  margin-top: 5px;
-}
-
-.mb-5 {
-  margin-bottom: 5px;
-}
-
-.mt-15 {
-  margin-top: 15px;
-}
-
 .color-transparent {
   background-color: transparent !important;
 }
 
 .green {
   color:  #2E7D32;
-}
-
-.my-10 {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.my-5 {
-  margin-top: 5px;
-  margin-bottom: 50px;
 }
 
 .expand-auto {
@@ -111,32 +76,3 @@ mat-sidenav {
   border-bottom: 5px solid #607D8B  !important;
 }
 
-.mx-10 {  
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.my-10 {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.bg-white {
-  background-color: white;
-}
-
-.ml-20{
-  margin-left: 20px;
-}
-
-.mr-20{
-  margin-right: 20px;
-}
-
-.breadcrumb-toolbar {
-  color: white !important;
-  background-color: #005457 !important;
-  font-size: 16px !important;
-  height: 35px !important;
-  min-height: 35px !important;
-}

@@ -18,7 +18,7 @@ export class ViewComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private api: ApiService) { }
 
-  ngOnInit() {
+  ngOnInit() {   
     this.sub = this.route.params.pipe(
         map(params => params['questionId']),
         switchMap(questionId => this.api.get(`admin/questions/${questionId}`))
@@ -27,7 +27,11 @@ export class ViewComponent implements OnInit, OnDestroy {
           errMsg => console.log(errMsg) 
       )
   }
-  
+
+  numberToChar(i: number) {
+    return String.fromCharCode(97 + i)
+  }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
