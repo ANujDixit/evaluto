@@ -1,13 +1,13 @@
 <div class="card">
   <h5 class="card-header">Question</h5>
   <div class="card-body">
-    <p class="mb-3">{{ question?.title }}</p>
+    <p class="mb-3 small">{{ question?.title }}</p>
     <div class="my-2" fxLayout="row" *ngFor="let choice of question?.choices; let i = index;">
       <div fxFlex="3">
           <mat-icon *ngIf="choice.correct" class="green">done</mat-icon>
       </div>
-      <div fxFlex="2" class="small">{{numberToChar(i)}}</div>
-      <div fxFlex="95" class="small"> {{ choice.title }}</div>
+      <div fxFlex="2" class="text-muted small">{{numberToChar(i)}}</div>
+      <div fxFlex="95" class="text-muted small"> {{ choice.title }}</div>
     </div>       
   </div>
   <div class="card-footer">
