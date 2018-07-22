@@ -19,6 +19,7 @@ defmodule Server.Quiz.Access.Question do
         |> Repo.get!(id)
         |> Repo.preload([choices: (from c in Choice, order_by: c.seq, preload: [:tenant])])
         |> Repo.preload(:tenant)
+        |> Repo.preload([:created_by_user, :updated_by_user])
       end  
 
       def create_question(resource, attrs \\ %{}) do
@@ -31,9 +32,9 @@ defmodule Server.Quiz.Access.Question do
 
       def update_question(resource, %Question{} = question, attrs) do
         question
+        |> Question.changeset(attrs, resource.tenant)
         |> Ecto.Changeset.change()
         |> Ecto.Changeset.put_assoc(:updated_by_user, resource.current_user)
-        |> Question.changeset(attrs, resource.tenant)
         |> Repo.update()
       end
 

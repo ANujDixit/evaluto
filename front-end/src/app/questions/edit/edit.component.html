@@ -1,3 +1,71 @@
-<p>
-  edit works!
-</p>
+<div class="card"> 
+ 
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="card-header">
+      <h5>Edit Question</h5>
+      <div>
+        <span class="small text-primary hover-click"
+                            [routerLink]= "['/admin/quiz/questions/list']">
+                            Questions
+        </span> 
+        <span class="small text-muted">/ </span>
+        <span class="small text-muted">Edit</span>
+      </div>  
+    </div>    
+
+    <div class="card-body">
+      <mat-card>
+        <form [formGroup]="questionForm" (ngSubmit)="edit()">       
+          <mat-card-content>  
+            <mat-form-field fxFill>
+              <textarea matInput placeholder="Question title" formControlName="title"></textarea>
+            </mat-form-field>
+            <div formArrayName="choices" fxFill>    
+              <div fxFlex="5" class="font-weight-bold">Correct</div>    
+              <div *ngFor="let choice of choiceForms; let i = index" [formGroupName]="i" fxLayoutAlign="start center">
+                <mat-checkbox formControlName="correct" fxFlex="5"></mat-checkbox>
+                <mat-form-field fxFlex>
+                  <textarea matInput [placeholder]="'Choice ' + (i+1)" formControlName="title"></textarea>
+                </mat-form-field>
+                <button mat-button fxflex="5" type="button" color="warn" 
+                        *ngIf="!!choice.value.id"
+                        (click)="deleteChoiceById(choice.value.id)">
+                  <mat-icon>delete_outline</mat-icon>
+                </button> 
+                <button mat-button fxflex="5" type="button" color="warn" 
+                        *ngIf="!choice.value.id"
+                        (click)="deleteChoiceByIndex(i)">
+                  <mat-icon>delete_outline</mat-icon>
+                </button> 
+              </div>  
+            </div>
+          </mat-card-content>
+          
+          <div fxLayoutAlign="end center">
+            <button mat-button type="button" color="primary" (click)="addChoice()">
+              <mat-icon>add_box</mat-icon>
+            </button> 
+          </div>
+        
+          <mat-form-field fxFill>
+            <textarea matInput placeholder="Explanation" formControlName="explanation"></textarea>
+          </mat-form-field>    
+
+          <mat-chip-list>
+            <mat-chip>Papadum</mat-chip>
+            <mat-chip>Naan</mat-chip>
+            <mat-chip>Dal</mat-chip>
+          </mat-chip-list>
+  
+          <mat-card-actions fxLayoutAlign="end center">
+            <button mat-raised-button type="submit" fxFlex="10" color="primary" [disabled]="questionForm?.invalid">Submit</button>
+          </mat-card-actions>
+        </form>  
+      </mat-card>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../core/services/api.service';
-import { switchMap, debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 @Component({

@@ -1,14 +1,28 @@
 <div class="card">
-  <h5 class="card-header">Question</h5>
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="card-header">
+    <h5>View Question</h5>
+    <div>
+      <span class="small text-primary hover-click"
+                          [routerLink]= "['/admin/quiz/questions/list']">
+                          Questions
+      </span> 
+      <span class="small text-muted">/ </span>
+      <span class="small text-muted">View</span>
+    </div>  
+  </div> 
   <div class="card-body">
     <p class="mb-3 small">{{ question?.title }}</p>
     <div class="my-2" fxLayout="row" *ngFor="let choice of question?.choices; let i = index;">
       <div fxFlex="3">
-          <mat-icon *ngIf="choice.correct" class="green">done</mat-icon>
+          <mat-icon *ngIf="choice?.correct" class="green">done</mat-icon>
       </div>
       <div fxFlex="2" class="text-muted small">{{numberToChar(i)}}</div>
-      <div fxFlex="95" class="text-muted small"> {{ choice.title }}</div>
-    </div>       
+      <div fxFlex="95" class="text-muted small"> {{ choice?.title }}</div>
+    </div>   
+    <div>
+      <h6>Explanation</h6>
+      <p class="small text-muted">{{ question?.explanation}}</p>
+    </div>    
   </div>
   <div class="card-footer">
     <button  mat-button type="button" color="primary" 
@@ -16,7 +30,7 @@
       Back
     </button> 
     <button  mat-button type="button" color="primary" 
-      [routerLink]= "['/admin/quiz/questions', question.id, 'edit']">
+      [routerLink]= "['/admin/quiz/questions', question?.id, 'edit']">
       Edit
     </button>    
   </div>
