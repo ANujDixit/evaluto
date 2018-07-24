@@ -17,6 +17,7 @@ export class EditComponent implements OnInit, OnDestroy, OnChanges {
   choices: FormArray;
   question: any;
   private sub: Subscription = new Subscription();
+  options: any;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -24,6 +25,19 @@ export class EditComponent implements OnInit, OnDestroy, OnChanges {
               private api: ApiService,
               private uiService: UiService) {
     this.createForm();           
+    this.options = {  onUpdate: 
+                        (event: any) => {
+                          console.log(event.oldIndex, event.newIndex )
+                          let oldIndex = this.choiceForms.controls.findIndex(x => x.value.seq === event.oldIndex);
+                          let newIndex = this.choiceForms.controls.findIndex(x => x.value.seq === event.newIndex);
+                          
+                          this.choiceForms.at(oldIndex).patchValue({"seq": event.newIndex });
+                          this.choiceForms.at(newIndex).patchValue({"seq": event.oldIndex });
+                          
+                          this.choiceForms.controls = this.choiceForms.controls.sort(function(a, b){ return a.value.seq - b.value.seq})
+                    
+                        }
+                  };
   }
 
   ngOnInit() {
@@ -39,7 +53,7 @@ export class EditComponent implements OnInit, OnDestroy, OnChanges {
       id: ['', Validators.required],
       title: ['', Validators.required],
       type: ['', Validators.required],
-      explanation: [''],
+      explanation: '',
       choices: this.fb.array([])
     });
   }
@@ -86,36 +100,29 @@ export class EditComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   get choiceForms(){
-    return <FormArray>this.questionForm.get('choices')['controls']
-                      .filter((element) =>  element.value.delete === false)  
+    return this.questionForm.get('choices') as FormArray;
   } 
-  
+
   createChoice(seq: number): FormGroup {
     return this.fb.group({
       title: '',
       correct: false,
-      seq: seq
+      seq: seq,
+      delete: false
     });
   }
   
   addChoice(): void {
-    const choice = this.fb.group({
-      title: '',
-      correct: false,
-      seq: this.choiceForms.length
-    })
- 
-    this.choiceForms.push(choice);
+    this.choiceForms.push(this.createChoice(this.choiceForms.length + 1))
   }
 
-  deleteChoiceByIndex(i: number): void {
-   this.choiceForms.removeAt(i)
+  deleteChoiceByIndex(index: number): void {
+    this.choiceForms.removeAt(index);
   }
 
   deleteChoiceById(id: string): void {    
-    let index = this.questionForm.controls['choices']['controls']
-                      .findIndex(x => x.value.id === id);
-    this.questionForm.value.choices[index].delete = true ; 
+    let index = this.choiceForms.controls.findIndex(x => x.value.id === id);
+    this.choiceForms.at(index).patchValue({"delete": true});
   }
 
   edit() {

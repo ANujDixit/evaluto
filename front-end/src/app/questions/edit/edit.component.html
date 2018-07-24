@@ -10,7 +10,9 @@
         <span class="small text-muted">/ </span>
         <span class="small text-muted">Edit</span>
       </div>  
-    </div>    
+    </div>   
+   
+    {{ this.choiceForms.value | json }} 
 
     <div class="card-body">
       <mat-card>
@@ -19,23 +21,25 @@
             <mat-form-field fxFill>
               <textarea matInput placeholder="Question title" formControlName="title"></textarea>
             </mat-form-field>
-            <div formArrayName="choices" fxFill>    
+            <div [sortablejs]="choiceForms" formArrayName="choices" fxFill [sortablejsOptions]="options">    
               <div fxFlex="5" class="font-weight-bold">Correct</div>    
-              <div *ngFor="let choice of choiceForms; let i = index" [formGroupName]="i" fxLayoutAlign="start center">
-                <mat-checkbox formControlName="correct" fxFlex="5"></mat-checkbox>
-                <mat-form-field fxFlex>
-                  <textarea matInput [placeholder]="'Choice ' + (i+1)" formControlName="title"></textarea>
-                </mat-form-field>
-                <button mat-button fxflex="5" type="button" color="warn" 
-                        *ngIf="!!choice.value.id"
-                        (click)="deleteChoiceById(choice.value.id)">
-                  <mat-icon>delete_outline</mat-icon>
-                </button> 
-                <button mat-button fxflex="5" type="button" color="warn" 
-                        *ngIf="!choice.value.id"
-                        (click)="deleteChoiceByIndex(i)">
-                  <mat-icon>delete_outline</mat-icon>
-                </button> 
+              <div *ngFor="let choice of choiceForms.controls; let i = index" [formGroupName]="i" fxLayoutAlign="start center">
+                <div *ngIf="!choice.value.delete" fxLayoutAlign="start center" fxFill >
+                  <mat-checkbox formControlName="correct" fxFlex="5"></mat-checkbox>
+                  <mat-form-field fxFlex>
+                    <textarea matInput [placeholder]="'Choice ' + (i+1)" formControlName="title"></textarea>
+                  </mat-form-field>
+                  <button mat-button fxflex="3" type="button" color="warn" 
+                          *ngIf="!!choice.value.id"
+                          (click)="deleteChoiceById(choice.value.id)">
+                    <mat-icon>delete_outline</mat-icon>
+                  </button> 
+                  <button mat-button fxflex="5" type="button" color="warn" 
+                          *ngIf="!choice.value.id"
+                          (click)="deleteChoiceByIndex(i)">
+                    <mat-icon>delete_outline</mat-icon>
+                  </button> 
+                </div>
               </div>  
             </div>
           </mat-card-content>
