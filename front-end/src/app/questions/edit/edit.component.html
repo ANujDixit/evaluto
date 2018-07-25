@@ -21,7 +21,7 @@
             <mat-form-field fxFill>
               <textarea matInput placeholder="Question title" formControlName="title"></textarea>
             </mat-form-field>
-            <div [sortablejs]="choiceForms" formArrayName="choices" fxFill [sortablejsOptions]="options">    
+            <div formArrayName="choices" fxFill >    
               <div fxFlex="5" class="font-weight-bold">Correct</div>    
               <div *ngFor="let choice of choiceForms.controls; let i = index" [formGroupName]="i" fxLayoutAlign="start center">
                 <div *ngIf="!choice.value.delete" fxLayoutAlign="start center" fxFill >

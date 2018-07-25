@@ -25,6 +25,18 @@ defmodule ServerWeb.Api.Admin.QuestionController do
 
   def update(conn, %{"id" => id, "question" => question_params}, resource) do
     question = Quiz.get_question!(resource, id)
+    
+    updated_choices =
+               question_params["choices"] 
+               |> Enum.filter(&match?(%{"delete" => false}, &1))
+               |> Enum.with_index 
+               |> Enum.map( fn({x, index}) -> Map.put(x, "seq", index + 1) end)
+               
+    deleted_choices =
+               question_params["choices"] 
+               |> Enum.filter(&match?(%{"delete" => true}, &1))
+               
+    question_params = Map.put(question_params, "choices", updated_choices ++ deleted_choices)      
 
     with {:ok, %Question{} = question} <- Quiz.update_question(resource, question, question_params) do
       render(conn, "show.json", question: question)
