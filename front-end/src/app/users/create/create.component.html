@@ -1,7 +1,15 @@
 <div class="card">
-  <div class="card-header">
-    Add User
-  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="card-header">
+    <h5 class="text-muted">Add User</h5>
+    <div>
+      <span class="small text-primary hover-click"
+                          [routerLink]= "['/admin/uam/users/list']">
+                          Users
+      </span> 
+      <span class="small text-muted">/ </span>
+      <span class="small text-muted">Create</span>
+    </div>  
+  </div>  
   <div class="card-body">
     <mat-dialog-content [formGroup]="form">
       <h6 class="text-muted">Login Details</h6>
@@ -15,9 +23,9 @@
         </mat-form-field>
       </div>
 
-      <h6 class="text-muted">Candidate Details</h6>
-      <mat-divider></mat-divider>
-      <div fxLayout="row" fxLayoutGap="20px">
+      <h6 class="text-muted mt-3">Candidate Details</h6>
+      <mat-divider class="mb-3"></mat-divider>
+      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-around center">
         <mat-form-field fxFlex>
           <input matInput placeholder="First Name" formControlName="first_name">
         </mat-form-field>
@@ -30,8 +38,8 @@
         </mat-radio-group>          
       </div>
 
-      <h6 class="text-muted">Group Details</h6>
-      <mat-divider></mat-divider>
+      <h6 class="text-muted mt-3">Group Details</h6>
+      <mat-divider  class="mb-3"></mat-divider>
       <div fxLayout="row" fxLayoutGap="20px">  
         <mat-form-field>
           <mat-select formControlName="role">    
@@ -43,7 +51,7 @@
       </div>      
     </mat-dialog-content>
   </div>  
-  <div class="card-footer" fxLayout="row" fxLayoutAlign="end center" >
+  <div class="card-footer" fxLayout="row" fxLayoutAlign="end" >
     <mat-dialog-actions>
       <button class="mat-raised-button mat-accent" (click)="create()">Save</button>
     </mat-dialog-actions>
