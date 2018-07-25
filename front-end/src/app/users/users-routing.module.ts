@@ -13,8 +13,8 @@ const routes: Routes = [{
     {path: '', redirectTo: '/admin/uam/users/list', pathMatch: 'full' },
     {path: 'list', component: ListComponent},
     {path: 'create', component: CreateComponent},
-    {path: ':questionId', component: ViewComponent},
-    {path: ':questionId/edit', component: EditComponent}
+    {path: ':userId', component: ViewComponent},
+    {path: ':userId/edit', component: EditComponent}
   ],
   
 }];

@@ -1,22 +1,38 @@
 <div class="card">
-    <div class="card-header">
-      Create User
-    </div>
-    <div class="card-body">
-      <mat-dialog-content [formGroup]="form">
-        <div fxLayout="row" fxLayoutGap="10px">
-          <mat-form-field fxFlex>
-            <input matInput placeholder="First Name" formControlName="first_name">
-          </mat-form-field>
-          <mat-form-field fxFlex>
-              <input matInput placeholder="Last Name" formControlName="last_name">
-          </mat-form-field>
-        </div>
-      
-        <mat-form-field fxFill>
+  <div class="card-header">
+    Add User
+  </div>
+  <div class="card-body">
+    <mat-dialog-content [formGroup]="form">
+      <h6 class="text-muted">Login Details</h6>
+      <mat-divider></mat-divider>
+      <div fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field fxFlex>
             <input matInput placeholder="Email" formControlName="username">
         </mat-form-field>
-      
+        <mat-form-field fxFlex>
+            <input matInput placeholder="Password" formControlName="password">
+        </mat-form-field>
+      </div>
+
+      <h6 class="text-muted">Candidate Details</h6>
+      <mat-divider></mat-divider>
+      <div fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field fxFlex>
+          <input matInput placeholder="First Name" formControlName="first_name">
+        </mat-form-field>
+        <mat-form-field fxFlex>
+            <input matInput placeholder="Last Name" formControlName="last_name">
+        </mat-form-field>
+        <mat-radio-group fxFlex>
+          <mat-radio-button value="male" class="mr-2">Male</mat-radio-button>
+          <mat-radio-button value="female">Female</mat-radio-button>
+        </mat-radio-group>          
+      </div>
+
+      <h6 class="text-muted">Group Details</h6>
+      <mat-divider></mat-divider>
+      <div fxLayout="row" fxLayoutGap="20px">  
         <mat-form-field>
           <mat-select formControlName="role">    
             <mat-option value="admin">Admin</mat-option>
@@ -24,15 +40,14 @@
             <mat-option value="participant">Participant</mat-option>    
           </mat-select>
         </mat-form-field>
-      
-      </mat-dialog-content>
-    </div>  
-    <div class="card-footer">
-      <mat-dialog-actions>
-        <button class="mat-raised-button"(click)="close()">Close</button>
-        <button class="mat-raised-button mat-accent" (click)="create_or_edit()">Save</button>
-      </mat-dialog-actions>
-    </div>   
-  </div>
-
+      </div>      
+    </mat-dialog-content>
+  </div>  
+  <div class="card-footer" fxLayout="row" fxLayoutAlign="end center" >
+    <mat-dialog-actions>
+      <button class="mat-raised-button mat-accent" (click)="create()">Save</button>
+    </mat-dialog-actions>
+  </div>   
+</div>
+ 
 

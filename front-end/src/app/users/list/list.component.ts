@@ -84,24 +84,6 @@ export class ListComponent implements OnInit, OnDestroy {
         this.users.data.forEach(row => this.selection.select(row));
   }
 
-  openDialog(user: User): void {
-    const dialogRef = this.dialog.open(CreateComponentDialog, {
-      width: '500px',
-      data: user
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === "saved") {
-        this.uiService.showToast("User Created Successfully", 'Close');
-        this.getUsers();
-        
-      }
-      if (result === "edited") {
-        this.uiService.showToast("User Edited Successfully", 'Close');
-        this.getUsers();
-      }
-    });
-  }
 
   deleteSelection(){
     const selectedIds = this.selection.selected.map(user => user.id);

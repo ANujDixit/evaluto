@@ -29,6 +29,7 @@ defmodule Server.Accounts.Access.User do
         User
         |> where([u], u.tenant_id == ^resource.tenant.id)
         |> Repo.get!(id)
+        |> Repo.preload(:groups)
       end 
       
       def get_users_by_ids(resource, ids) do

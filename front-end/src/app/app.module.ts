@@ -17,7 +17,6 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
-import { SortablejsModule } from 'angular-sortablejs';
 
 import { HttpHeaderInterceptor } from './core/services/http-header-interceptor';
 import { HttpErrorInterceptor } from './core/services/http-error-interceptor';
@@ -42,8 +41,7 @@ import { HttpErrorInterceptor } from './core/services/http-error-interceptor';
     MatSnackBarModule,
     CoreModule,
     SharedModule,
-    AuthModule,
-    SortablejsModule.forRoot({ animation: 150 }), 
+    AuthModule,   
   ],
   providers: [
     UiService,

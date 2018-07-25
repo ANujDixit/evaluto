@@ -24,28 +24,7 @@ export class EditComponent implements OnInit, OnDestroy, OnChanges {
               private fb: FormBuilder,
               private api: ApiService,
               private uiService: UiService) {
-    this.createForm();           
-    // this.options = {  onUpdate: 
-    //                     (event: any) => {
-                          
-    //                       let oldIndex = this.choiceForms.controls.findIndex(x => x.value.seq === event.oldIndex);
-    //                       let newIndex = this.choiceForms.controls.findIndex(x => x.value.seq === event.newIndex);
-                          
-    //                       this.choiceForms.at(oldIndex).patchValue({"seq": event.newIndex});
-    //                       this.choiceForms.at(newIndex).patchValue({"seq": event.oldIndex});
-                          
-    //                       // let controls = this.choiceForms.controls.sort(function(a, b){ return a.value.seq - b.value.seq});
-    //                       // this.questionForm.setControl('choices', controls);
-                          
-    //                       // this.choiceForms.controls = controls
-    //                     }
-    //               };
-    
-    // this.choiceForms.valueChanges.subscribe(() => {
-    //   this.choiceForms.controls.map((x, index) => this.choiceForms.at(index).patchValue({"seq": index + 1}) )
-    // });
-      
-
+    this.createForm();     
   }
 
   ngOnInit() {

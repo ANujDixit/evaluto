@@ -13,8 +13,8 @@ const httpOptions = {
 
 export class ApiService {
 
-  private baseUrl = "https://evaluto-anytimetests.c9users.io:8082/api"
-  //private baseUrl = "http://localhost:8082/api"
+  //private baseUrl = "https://evaluto-anytimetests.c9users.io:8082/api"
+  private baseUrl = "http://localhost:8082/api"
 
   constructor(private http: HttpClient) { }
   

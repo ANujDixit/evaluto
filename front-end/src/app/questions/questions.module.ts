@@ -8,13 +8,13 @@ import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 import { ViewComponent } from './view/view.component';
 import { QuestionTypesDialogComponent } from './question-types-dialog/question-types-dialog.component';
-import { SortablejsModule } from 'angular-sortablejs';
+
 
 @NgModule({
   imports: [
     SharedModule,
     QuestionsRoutingModule,
-    SortablejsModule
+
   ],
   declarations: [
     HomeComponent, 

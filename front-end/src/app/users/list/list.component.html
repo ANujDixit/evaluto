@@ -11,7 +11,7 @@
 				</form>
 			</span>    
 			<span fxLayoutGap="5px">
-				<button mat-raised-button color="accent" (click)="openDialog(user)">
+				<button mat-raised-button color="accent"  routerLink="/admin/uam/users/create" >
 					<mat-icon>add</mat-icon>New User
 				</button> 
 				<button mat-raised-button color="warn" (click)="deleteSelection()">
@@ -76,7 +76,7 @@
 							<mat-icon>more_vert</mat-icon>
 						</button>
 						<mat-menu #menu="matMenu">
-							<button mat-menu-item (click)="openDialog(element)" type="button">
+							<button mat-menu-item routerLink="/admin/uam/users/{{ element.id }}/edit" type="button">
 								<mat-icon>edit</mat-icon>
 								<span>Edit</span>
 							</button>

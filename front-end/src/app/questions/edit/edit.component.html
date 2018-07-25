@@ -11,9 +11,7 @@
         <span class="small text-muted">Edit</span>
       </div>  
     </div>   
-   
-    {{ this.choiceForms.value | json }} 
-
+    
     <div class="card-body">
       <mat-card>
         <form [formGroup]="questionForm" (ngSubmit)="edit()">       

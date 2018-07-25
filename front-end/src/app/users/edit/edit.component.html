@@ -1,3 +1,37 @@
-<p>
-  edit works!
-</p>
+<div class="card">
+  <div class="card-header">
+    Edit User
+  </div>
+  <div class="card-body">
+    <mat-dialog-content [formGroup]="form">
+      <div fxLayout="row" fxLayoutGap="10px">
+        <mat-form-field fxFlex>
+          <input matInput placeholder="First Name" formControlName="first_name">
+        </mat-form-field>
+        <mat-form-field fxFlex>
+            <input matInput placeholder="Last Name" formControlName="last_name">
+        </mat-form-field>
+      </div>
+
+      <mat-form-field fxFill>
+          <input matInput placeholder="Email" formControlName="username">
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-select formControlName="role">    
+          <mat-option value="admin">Admin</mat-option>
+          <mat-option value="instructor">Instructor</mat-option>
+          <mat-option value="participant">Participant</mat-option>    
+        </mat-select>
+      </mat-form-field>
+    
+    </mat-dialog-content>
+  </div>  
+  <div class="card-footer">
+    <mat-dialog-actions>
+      <button class="mat-raised-button mat-accent" (click)="edit()">Save</button>
+    </mat-dialog-actions>
+  </div>   
+</div>
+
+
