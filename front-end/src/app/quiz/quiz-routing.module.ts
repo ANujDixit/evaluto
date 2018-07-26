@@ -10,6 +10,7 @@ const routes: Routes = [
       { path: '', redirectTo: '/admin/quiz/home', pathMatch: 'full' },
       { path: 'home', component: QuizHomeComponent },       
       { path: 'questions', loadChildren: '../questions/questions.module#QuestionsModule'},
+      { path: 'tests', loadChildren: '../tests/tests.module#TestsModule'},
     ] 
   }
 ];

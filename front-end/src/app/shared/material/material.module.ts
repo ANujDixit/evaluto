@@ -20,6 +20,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatProgressSpinnerModule,
     MatTabsModule,
     MatButtonToggleModule,
-    MatRadioModule 
+    MatRadioModule,
+    MatGridListModule
   ],
   exports: [
     MatButtonModule,
@@ -66,7 +68,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatProgressSpinnerModule,
     MatTabsModule,
     MatButtonToggleModule,
-    MatRadioModule 
+    MatRadioModule,
+    MatGridListModule
   ],
 })
 export class MaterialModule { }
