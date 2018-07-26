@@ -1,6 +1,83 @@
-<mat-grid-list cols="2" rowHeight="2:1">
-  <mat-grid-tile>1</mat-grid-tile>
-  <mat-grid-tile>2</mat-grid-tile>
-  <mat-grid-tile>3</mat-grid-tile>
-  <mat-grid-tile>4</mat-grid-tile>
-</mat-grid-list>
+<div class="card bg-light">
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="testCreateFormGroup" [editable]="isEditable">
+      <form [formGroup]="testCreateFormGroup">
+        <ng-template matStepLabel>Create a New Test</ng-template>
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field fxFlex="50">
+            <input matInput placeholder="Test Name" formControlName="test_name" required>
+          </mat-form-field> 
+          <mat-form-field fxFlex="50">
+            <mat-select placeholder="Select Category">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+       
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Test Setting</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="Address" formControlName="secondCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+     <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Add Question</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="Address" formControlName="thirdCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="forthFormGroup" [editable]="isEditable">
+      <form [formGroup]="forthFormGroup">
+        <ng-template matStepLabel>Publish</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="Address" formControlName="forthCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    
+    <mat-step [stepControl]="fifthFormGroup" [editable]="isEditable">
+      <form [formGroup]="fifthFormGroup">
+        <ng-template matStepLabel>Assign Test</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="Address" formControlName="fifthCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
