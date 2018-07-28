@@ -22,6 +22,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {     MatNativeDateModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -47,7 +50,10 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatButtonToggleModule,
     MatRadioModule,
     MatGridListModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
   ],
   exports: [
     MatButtonModule,
@@ -72,7 +78,10 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatButtonToggleModule,
     MatRadioModule,
     MatGridListModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
   ],
 })
 export class MaterialModule { }

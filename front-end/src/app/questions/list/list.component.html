@@ -1,11 +1,20 @@
 <div class="card">
-  <div fxLayout="row" class="card-header pb-0" fxLayoutAlign="space-between start" >
+  <div fxLayout="row" class="card-header" fxLayoutAlign="space-between start" >
     <mat-card-title>Questions</mat-card-title>
     <button mat-raised-button color="primary" (click)="addQuestion()">
       <mat-icon>add</mat-icon>New Question
     </button>
   </div>  
-  <div class="card-body" fxLayout="row wrap" fxLayout.sm="column"  fxLayoutAlign="space-between center">
+  <div class="container card-body" *ngIf="questions?.length == 0">
+    <div class="jumbotron">
+      <p class="lead">Currently Question Bank is empty, please click below to add questions</p>
+      <hr class="my-4">         
+      <button mat-raised-button color="primary" (click)="addQuestion()">
+          <mat-icon>add</mat-icon>New Question
+      </button>
+    </div>
+  </div>
+  <div *ngIf="questions?.length > 0" class="card-body" fxLayout="row wrap" fxLayout.sm="column"  fxLayoutAlign="space-between center">
     <mat-card fxFlex="49" class="my-1" *ngFor="let question of questions; let i = index;"
       (click)="showQuestion(question)">
       <mat-card-header fxLayout="column">

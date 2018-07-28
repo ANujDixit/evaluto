@@ -8,10 +8,12 @@ import { EditComponent } from './edit/edit.component';
 import { ViewComponent } from './view/view.component';
 import { CreateComponent } from './create/create.component';
 
+
 @NgModule({
   imports: [
     SharedModule,
-    TestsRoutingModule
+    TestsRoutingModule,
+
   ],
   declarations: [HomeComponent, ListComponent, EditComponent, ViewComponent, CreateComponent]
 })

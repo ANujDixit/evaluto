@@ -1,25 +1,36 @@
 <div class="card">
   <mat-horizontal-stepper linear #stepper >
-    <mat-step [stepControl]="testCreateFormGroup" [editable]="isEditable">
+    <mat-step [stepControl]="testCreateFormGroup" [editable]="isEditable"> 
+      <hr class="mt-0">     
       <form [formGroup]="testCreateFormGroup">
-        <ng-template matStepLabel>Create a New Test</ng-template>
-        <div fxLayout="row" fxLayoutGap="20px">
-          <mat-form-field fxFlex="50">
-            <input matInput placeholder="Test Name" formControlName="test_name" required>
-          </mat-form-field> 
-          <mat-form-field fxFlex="50">
-            <mat-select placeholder="Select Category">
-              <mat-option *ngFor="let food of foods" [value]="food.value">
-                {{food.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <ng-template matStepLabel>Create a New Test</ng-template>  
+        <div class="container">
+          <div class="card">
+            <div class="card-header h6">Create test</div>
+            <div class="card-body" fxLayout="column">
+              <mat-form-field>
+                <input matInput placeholder="Test Name" formControlName="test_name" required>
+              </mat-form-field> 
+              <mat-form-field class="font-size85">
+                <mat-select placeholder="Select Category">
+                  <mat-option *ngFor="let food of foods" [value]="food.value">
+                    {{food.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>      
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>                  
+            </div>
+            <div class="card-footer" fxLayout="row" fxLayoutAlign="end center">          
+              <button mat-button matStepperNext>Next</button>       
+            </div>
+           
+          </div>   
         </div>
-       
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
+      </form>  
     </mat-step>
     <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
       <form [formGroup]="secondFormGroup">

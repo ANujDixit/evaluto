@@ -1,3 +1,17 @@
-<p>
-  list works!
-</p>
+<div class="card">
+  <div fxLayout="row" class="card-header" fxLayoutAlign="space-between start" >
+    <mat-card-title>Tests</mat-card-title>
+    <button mat-raised-button color="primary" routerLink="/admin/quiz/tests/create">
+      <mat-icon>add</mat-icon>New Test
+    </button>
+  </div>  
+  <div class="container card-body">
+    <div class="jumbotron">
+      <p class="lead">Currently no tests scheduled, please click below to add questions</p>
+      <hr class="my-4">         
+      <button mat-raised-button color="primary" routerLink="/admin/quiz/tests/create">
+          <mat-icon>add</mat-icon>New Test
+      </button>
+    </div>
+  </div>   
+</div>
