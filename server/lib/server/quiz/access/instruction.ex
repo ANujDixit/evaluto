@@ -8,14 +8,14 @@ defmodule Server.Quiz.Access.Instruction do
 
       def list_instructions(resource) do
         Instruction
-        |> where([c], c.tenant_id == ^resource.tenant.id)
+        |> where([i], i.tenant_id == ^resource.tenant.id)
         |> order_by(desc: :updated_at)
         |> Repo.all()
       end
      
       def get_instruction!(resource, id) do 
         Instruction
-        |> where([c], c.tenant_id == ^resource.tenant.id)
+        |> where([i], i.tenant_id == ^resource.tenant.id)
         |> Repo.get!(id)
       end  
     

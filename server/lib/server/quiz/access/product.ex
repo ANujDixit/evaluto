@@ -8,14 +8,14 @@ defmodule Server.Quiz.Access.Product do
 
       def list_products(resource) do
         Product
-        |> where([c], c.tenant_id == ^resource.tenant.id)
+        |> where([p], p.tenant_id == ^resource.tenant.id)
         |> order_by(desc: :updated_at)
         |> Repo.all()
       end
      
       def get_product!(resource, id) do 
         Product
-        |> where([c], c.tenant_id == ^resource.tenant.id)
+        |> where([p], p.tenant_id == ^resource.tenant.id)
         |> Repo.get!(id)
       end  
     

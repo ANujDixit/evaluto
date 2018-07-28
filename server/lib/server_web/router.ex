@@ -43,7 +43,7 @@ defmodule ServerWeb.Router do
     pipe_through [:api, :jwt_authenticated_admin]
     
     resources "/questions", QuestionController
-    resource "/sections", SectionController
+    resources "/sections", SectionController
     resources "/products", ProductController
     resources "/categories", CategoryController
     resources "/groups", GroupController do
@@ -51,7 +51,7 @@ defmodule ServerWeb.Router do
       post "/users/delete_all", GroupUserController, :delete_all
     end
     
-    resources "/tests", TestController 
+    resources "/tests", TestController do
       resources "/settings", TestSettingController
       resources "/slots", TestSlotController
       resources "/sections", TestSectionController

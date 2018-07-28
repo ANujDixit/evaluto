@@ -8,14 +8,14 @@ defmodule Server.Quiz.Access.Section do
 
       def list_sections(resource) do
         Section
-        |> where([c], c.tenant_id == ^resource.tenant.id)
+        |> where([s], s.tenant_id == ^resource.tenant.id)
         |> order_by(desc: :updated_at)
         |> Repo.all()
       end
      
       def get_section!(resource, id) do 
         Section
-        |> where([c], c.tenant_id == ^resource.tenant.id)
+        |> where([s], s.tenant_id == ^resource.tenant.id)
         |> Repo.get!(id)
       end  
     
