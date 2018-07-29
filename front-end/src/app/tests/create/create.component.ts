@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { durations } from '../../shared/data/durations.data';
+import { ApiService } from '../../core/services/api.service';
 
 @Component({
   selector: 'app-create',
@@ -13,7 +15,7 @@ export class CreateComponent implements OnInit {
   thirdFormGroup: FormGroup;
   forthFormGroup: FormGroup;
   fifthFormGroup: FormGroup;
-
+  durations: any[] = durations
 
   foods: any[] = [
     {value: 'steak-0', viewValue: 'Steak'},
@@ -23,9 +25,11 @@ export class CreateComponent implements OnInit {
   
   isEditable = false;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder,
+              private api: ApiService ) { }
 
   ngOnInit() {
+    this.fetchData();
     this.testCreateFormGroup = this._formBuilder.group({
       test_name: ['', Validators.required],
       category: '',
@@ -49,6 +53,18 @@ export class CreateComponent implements OnInit {
     this.fifthFormGroup = this._formBuilder.group({
       fifthCtrl: ['', Validators.required]
     });
+  }
+
+  fetchData(){
+    this.api.get('admin/tests/new')
+    .subscribe(
+      resp => {  
+       console.log(resp)
+      },
+      errMsg => {
+        console.log(errMsg)
+      }
+    );
   }
 
 
