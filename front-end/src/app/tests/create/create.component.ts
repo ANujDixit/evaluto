@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { durations } from '../../shared/data/durations.data';
 import { ApiService } from '../../core/services/api.service';
+import { MatStepper } from '@angular/material';
 
 @Component({
   selector: 'app-create',
@@ -15,13 +16,11 @@ export class CreateComponent implements OnInit {
   thirdFormGroup: FormGroup;
   forthFormGroup: FormGroup;
   fifthFormGroup: FormGroup;
-  durations: any[] = durations
+  durations: any[] = durations;
+  instructions: any[]; 
+  categories: any[]; 
 
-  foods: any[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
+  @ViewChild('stepper') stepper: MatStepper;
   
   isEditable = false;
 
@@ -31,16 +30,15 @@ export class CreateComponent implements OnInit {
   ngOnInit() {
     this.fetchData();
     this.testCreateFormGroup = this._formBuilder.group({
-      test_name: ['', Validators.required],
+      name: ['', Validators.required],
       category: '',
-      duration: '',
-      difficulty_level: '',
+      duration: '',  
       total_questions: '',
       total_marks: '',
-      test_template: '',
-      test_instructions: '',
-      section_count: ''
+      template: '',
+      instruction: ''  
     });
+
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
@@ -59,12 +57,18 @@ export class CreateComponent implements OnInit {
     this.api.get('admin/tests/new')
     .subscribe(
       resp => {  
-       console.log(resp)
+        this.categories = resp.categories
+        this.instructions = resp.instructions
       },
       errMsg => {
         console.log(errMsg)
       }
     );
+  }
+
+  createTest(){
+    this.stepper.next();
+    console.log("hello")
   }
 
 

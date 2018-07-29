@@ -9,32 +9,32 @@
             <div class="card-header h6">Create test</div>
             <div class="card-body" fxLayout="column">
               <mat-form-field>
-                <input matInput placeholder="Test Name" formControlName="test_name" required>
+                <input matInput placeholder="Test Name" formControlName="name" required>
               </mat-form-field> 
               <div fxLayout="row" fxLayoutGap="20px">
                 <mat-form-field fxFlex>
-                  <mat-select placeholder="Select Category">
-                    <mat-option *ngFor="let food of foods" [value]="food.value">
-                      {{food.viewValue}}
+                  <mat-select placeholder="Select Category" formControlName="category">
+                    <mat-option *ngFor="let category of categories" [value]="category.value">
+                      {{category.viewValue}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>   
                 <mat-form-field fxFlex>
-                    <mat-select placeholder="Select Instructions">
-                      <mat-option *ngFor="let food of foods" [value]="food.value">
-                        {{food.viewValue}}
+                    <mat-select placeholder="Select Instructions" formControlName="instruction">
+                      <mat-option *ngFor="let instruction of instructions" [value]="instruction.value">
+                        {{instruction.viewValue}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>    
-              </div>   
-              <mat-form-field>
-                <mat-select placeholder="Select Test Duration">
-                  <mat-option *ngFor="let duration of durations" [value]="duration.value">
-                    {{duration.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+              </div>              
               <div fxLayout="row" fxLayoutGap="20px">
+                <mat-form-field fxFlex>
+                    <mat-select placeholder="Select Test Duration" formControlName="duration">
+                      <mat-option *ngFor="let duration of durations" [value]="duration.value">
+                        {{duration.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 <mat-form-field fxFlex>
                   <input matInput placeholder="Total Questions" formControlName="total_questions" required>
                 </mat-form-field> 
@@ -43,18 +43,17 @@
                 </mat-form-field> 
               </div>      
            
-                <mat-radio-group fxLayout="row" fxLayoutGap="20px">
-                    <mat-radio-button value="0">Default</mat-radio-button>
-                    <mat-radio-button value="1">Option 1</mat-radio-button>
-                    <mat-radio-button value="2">Option 1</mat-radio-button>
-                    <mat-radio-button value="3">Option 2</mat-radio-button>
-                </mat-radio-group>
+              <mat-radio-group fxLayout="row" fxLayoutGap="20px" formControlName="template">
+                  <mat-radio-button value="0">Default</mat-radio-button>
+                  <mat-radio-button value="1">Option 1</mat-radio-button>
+                  <mat-radio-button value="2">Option 1</mat-radio-button>
+                  <mat-radio-button value="3">Option 2</mat-radio-button>
+              </mat-radio-group>
                                   
-            </div>
-            
+            </div>            
               
             <div class="card-footer" fxLayout="row" fxLayoutAlign="end center">          
-              <button mat-button matStepperNext>Next</button>       
+              <button type="button" mat-button (click)="createTest()">Next</button>       
             </div>
            
           </div>   
