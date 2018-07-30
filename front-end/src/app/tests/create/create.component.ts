@@ -19,10 +19,12 @@ export class CreateComponent implements OnInit {
   durations: any[] = durations;
   instructions: any[]; 
   categories: any[]; 
+  test: any;
+  step = 0;
 
   @ViewChild('stepper') stepper: MatStepper;
   
-  isEditable = false;
+  isEditable = true;
 
   constructor(private _formBuilder: FormBuilder,
               private api: ApiService ) { }
@@ -66,9 +68,31 @@ export class CreateComponent implements OnInit {
     );
   }
 
-  createTest(){
-    this.stepper.next();
-    console.log("hello")
+  createTest(){   
+    const test = { "test": this.testCreateFormGroup.value }  
+    this.api.post('admin/tests', test)
+    .subscribe(
+      resp => {  
+        this.test = resp
+        this.stepper.next();
+      },
+      errMsg => {
+        console.log(errMsg)
+      }
+    );
+
+  }
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
   }
 
 

@@ -12,8 +12,8 @@ defmodule Server.Repo.Migrations.CreateTests do
       add :template_type, :integer, default: 0
       
       add :tenant_id, references(:tenants, on_delete: :delete_all, type: :binary_id ), null: false
-      add :instruction_id, references(:instructions, on_delete: :nothing, type: :binary_id), null: false
-      add :category_id, references(:categories, on_delete: :nothing, type: :binary_id), null: false
+      add :instruction_id, references(:instructions, on_delete: :nothing, type: :binary_id)
+      add :category_id, references(:categories, on_delete: :nothing, type: :binary_id)
 
       timestamps()
     end
