@@ -70,100 +70,139 @@
               <div class="card-header h5">Create Test Settings</div>
               <div class="card-body" fxLayout="column">
                 <mat-accordion class="example-headers-align">
-                    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                          Test Options
-                        </mat-panel-title>
-                        <mat-panel-description>
-                          Set the required fields for a candidate appearing in the test
-                          <mat-icon>account_circle</mat-icon>
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>       
-                      
-                      <mat-list>
-                        <mat-list-item> 
-                          <mat-checkbox>Mandatory to attempt all questions</mat-checkbox>
-                        </mat-list-item>
-                        <mat-list-item>  
-                          <mat-checkbox>Show marks/points for test</mat-checkbox>
-                        </mat-list-item>
-                        <mat-list-item> 
-                          <mat-checkbox>Allow user to move back and forward</mat-checkbox>
-                        </mat-list-item>
-                      </mat-list> 
-                         
-                  
-                      <mat-action-row>
-                        <button mat-button color="primary" (click)="nextStep()">Next</button>
-                      </mat-action-row>
-                    </mat-expansion-panel>
-                  
-                    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                          Arrangement And Grouping
-                        </mat-panel-title>
-                        <mat-panel-description>
-                          Shuffle and bundle questions to create vivid sets with similar questions
-                          <mat-icon>map</mat-icon>
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>
+                  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Test Options
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        Set the required fields for a candidate appearing in the test                        
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>      
+                    <mat-list>
+                      <mat-list-item> 
+                        <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
+                          <div fxFlex="60">Mandatory to attempt all questions</div>
+                          <div fxFlex="40">
+                            <mat-radio-group>
+                              <mat-radio-button value="1" class="m-3">Yes</mat-radio-button>
+                              <mat-radio-button value="0" class="m-3">No</mat-radio-button>
+                            </mat-radio-group>  
+                          </div>   
+                        </div>                                                
+                      </mat-list-item>
+                      <hr>
+                      <mat-list-item>  
+                        <mat-checkbox>Show marks/points for test</mat-checkbox>
+                      </mat-list-item>
+                      <mat-list-item> 
+                        <mat-checkbox>Allow user to move back and forward</mat-checkbox>
+                      </mat-list-item>
+                    </mat-list> 
+                    <mat-action-row>
+                      <button mat-button color="primary" (click)="nextStep()">Next</button>
+                    </mat-action-row>
+                  </mat-expansion-panel>
+                
+                  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Arrangement And Grouping
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        Shuffle and bundle questions to create vivid sets with similar questions                     
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
 
-                      <mat-list>
-                        <mat-list-item> 
-                          <div fxFlayout="row" fxLayoutAlign="space-between center" >
-                            <div fxFlex="40"  class="border m-2">
-                              Grouping
-                            </div>
-                            <div fxFlex="60" class="border m-2">
-                              <mat-checkbox fxFlex>Grouping questions section-wise</mat-checkbox>
-                              <mat-checkbox fxFlex>Shuffle questions within section</mat-checkbox> 
-                            </div>
-                          </div>              
-                        </mat-list-item>
-                        <mat-list-item>  
-                          <div fxFlayout="row" fxLayoutAlign="space-between center" >
-                            <div fxFlex="40"  class="border m-2">Shuffling</div>
-                            <div fxFlex="60"  class="border m-2">
-                              <mat-checkbox fxFill>Optionwise Suffling</mat-checkbox>
-                            </div>
+                    <div fxLayout="column"> 
+                      <div fxLayout="row" fxFill fxLayoutAlign="start center" class="border-bottom border-top" >
+                        <div fxFlex="30" class="font-weight-bold">Grouping</div>
+                        <div fxFlex="70" fxLayout="column" fxLayoutAlign="center center"> 
+                          <div fxLayout="row" fxFill fxLayoutAlign="start center" class="border-bottom">
+                            <div fxFlex="70">Grouping questions section-wise</div>                              
+                            <mat-radio-group fxFlex="30">
+                              <mat-radio-button value="1" class="m-3">Yes</mat-radio-button>
+                              <mat-radio-button value="0" class="m-3">No</mat-radio-button>
+                            </mat-radio-group>                            
+                          </div>                         
+                          <div fxLayout="row" fxFill fxLayoutAlign="start center">
+                            <div fxFlex="70">Shuffle Questions within sections</div>
+                            <mat-radio-group fxFlex="30">
+                              <mat-radio-button value="1" class="m-3">Yes</mat-radio-button>
+                              <mat-radio-button value="0" class="m-3">No</mat-radio-button>
+                            </mat-radio-group>  
                           </div>
-                        </mat-list-item>                    
-                      </mat-list> 
-                  
-                  
-                  
-                      <mat-action-row>
-                        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                        <button mat-button color="primary" (click)="nextStep()">Next</button>
-                      </mat-action-row>
-                    </mat-expansion-panel>
-                  
-                    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                          Day of the trip
-                        </mat-panel-title>
-                        <mat-panel-description>
-                          Inform the date you wish to travel
-                          <mat-icon>date_range</mat-icon>
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>
-                  
-                      <mat-form-field>
-                        <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" readonly>
-                      </mat-form-field>
-                      <mat-datepicker #picker></mat-datepicker>
-                  
-                      <mat-action-row>
-                        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                        <button mat-button color="primary" (click)="nextStep()">End</button>
-                      </mat-action-row>
-                    </mat-expansion-panel>
-                  
-                  </mat-accordion>
-                             
+                        </div>
+                      </div>                        
+                      <div fxLayout="row" fxFill fxLayoutAlign="start center">
+                        <div fxFlex="30" class="font-weight-bold">Shuffling</div>
+                        <div fxFlex="70" fxLayout="column" fxLayoutAlign="center center"> 
+                          <div fxLayout="row" fxFill fxLayoutAlign="start center">
+                            <div fxFlex="70">Optionwise Shuffling</div>                              
+                            <mat-radio-group fxFlex="30">
+                              <mat-radio-button value="1" class="m-3">Yes</mat-radio-button>
+                              <mat-radio-button value="0" class="m-3">No</mat-radio-button>
+                            </mat-radio-group>                            
+                          </div>     
+                        </div>
+                      </div>
+                    </div>    
+                    <mat-action-row>
+                      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                      <button mat-button color="primary" (click)="nextStep()">Next</button>
+                    </mat-action-row>
+                  </mat-expansion-panel>  
+
+                  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(1)" hideToggle>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Generate Rank
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        To produce the position of the candidates appearing in a test                 
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <div fxLayout="column"> 
+                      <div fxLayout="row" fxFill fxLayoutAlign="start center" class="border-bottom border-top" >
+                        <div fxFlex="30" class="font-weight-bold">Generate Rank</div>
+                        <div fxFlex="70" fxLayout="column" fxLayoutAlign="center center"> 
+                          <div fxLayout="row" fxFill fxLayoutAlign="start center" class="border-bottom">
+                            <div fxFlex="65">Calculate the ranks using automated or manual variations</div>                              
+                            <mat-radio-group fxFlex="35">
+                              <mat-radio-button value="1" class="m-3">Automated</mat-radio-button>
+                              <mat-radio-button value="0" class="m-3">Manual</mat-radio-button>
+                            </mat-radio-group>                            
+                          </div>     
+                        </div>
+                      </div>                        
+                      <div fxLayout="row" fxFill fxLayoutAlign="start center">
+                        <div fxFlex="30" class="font-weight-bold">Rank</div>
+                        <div fxFlex="70" fxLayout="column" fxLayoutAlign="center center"> 
+                          <div fxLayout="row" fxFill fxLayoutAlign="start center" class="border-bottom">
+                            <div fxFlex="70">Allow Duplicate ranks</div>                              
+                            <mat-radio-group fxFlex="30">
+                              <mat-radio-button value="1" class="m-3">Yes</mat-radio-button>
+                              <mat-radio-button value="0" class="m-3">No</mat-radio-button>
+                            </mat-radio-group>                            
+                          </div>     
+                          <div fxLayout="row" fxFill fxLayoutAlign="start center">
+                            <div fxFlex="70">Skip rank after a duplicate</div>                              
+                            <mat-radio-group fxFlex="30">
+                              <mat-radio-button value="1" class="m-3">Yes</mat-radio-button>
+                              <mat-radio-button value="0" class="m-3">No</mat-radio-button>
+                            </mat-radio-group>                            
+                          </div>  
+                        </div>
+                      </div>
+                    </div>    
+                    <mat-action-row>
+                      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                      <button mat-button color="primary" (click)="nextStep()">Next</button>
+                    </mat-action-row>
+                  </mat-expansion-panel> 
+
+                </mat-accordion>
               </div>  
               <div class="card-footer" fxLayout="row" fxLayoutAlign="end center">
                 <button mat-button matStepperPrevious>Back</button>
