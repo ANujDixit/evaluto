@@ -11,8 +11,8 @@ import { MatStepper } from '@angular/material';
 })
 export class CreateComponent implements OnInit {
   
-  testCreateFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  testFormGroup: FormGroup;
+  settingFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   forthFormGroup: FormGroup;
   fifthFormGroup: FormGroup;
@@ -31,7 +31,7 @@ export class CreateComponent implements OnInit {
 
   ngOnInit() {
     this.fetchData();
-    this.testCreateFormGroup = this._formBuilder.group({
+    this.testFormGroup = this._formBuilder.group({
       name: ['', Validators.required],
       category: '',
       duration: '',  
@@ -41,8 +41,11 @@ export class CreateComponent implements OnInit {
       instruction: ''  
     });
 
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+    this.settingFormGroup = this._formBuilder.group({
+      group_questions_section_wise: ['1', Validators.required],
+      sections_shuffle: ['0', Validators.required],
+      questions_shuffle: ['0', Validators.required],
+      options_shuffle: ['0', Validators.required]
     });
      this.thirdFormGroup = this._formBuilder.group({
       thirdCtrl: ['', Validators.required]
@@ -69,7 +72,7 @@ export class CreateComponent implements OnInit {
   }
 
   createTest(){   
-    const test = { "test": this.testCreateFormGroup.value }  
+    const test = { "test": this.testFormGroup.value }  
     this.api.post('admin/tests', test)
     .subscribe(
       resp => {  
@@ -80,7 +83,19 @@ export class CreateComponent implements OnInit {
         console.log(errMsg)
       }
     );
-
+  }
+  
+  createSetting(){   
+    const setting = { "setting": this.settingFormGroup.value }  
+    this.api.post(`admin/tests/${this.test.id}/settings`, setting)
+    .subscribe(
+      resp => {  
+        this.stepper.next();
+      },
+      errMsg => {
+        console.log(errMsg)
+      }
+    );
   }
 
   setStep(index: number) {

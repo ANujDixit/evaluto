@@ -6,7 +6,7 @@ defmodule Server.Quiz do
   use Server.Quiz.Access.Instruction
   
   use Server.Quiz.Access.Test
-  # use Server.Quiz.Access.TestSetting
+  use Server.Quiz.Access.TestSetting
   # use Server.Quiz.Access.TestSection
   # use Server.Quiz.Access.TestSlot
   # use Server.Quiz.Access.TestGroup
