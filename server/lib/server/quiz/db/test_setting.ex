@@ -2,7 +2,6 @@ defmodule Server.Quiz.TestSetting do
   use Server.Schema
   
   alias Server.Quiz.Test
-  alias Server.Accounts.Group
 
   schema "test_settings" do
     field :group_questions_section_wise, :boolean, default: true

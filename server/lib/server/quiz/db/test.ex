@@ -1,7 +1,7 @@
 defmodule Server.Quiz.Test do
   use Server.Schema
   
-  alias Server.Quiz.{ Instruction, Setting, Category, TestSetting }
+  alias Server.Quiz.{ Instruction, Setting, Category, TestSetting, TestSlot }
   alias Server.Accounts.Group
 
   schema "tests" do
@@ -13,7 +13,7 @@ defmodule Server.Quiz.Test do
     field :template_type, :integer, default: 0
     
     has_one :test_setting, TestSetting
-    # has_many :test_slots, TestSlot
+    has_many :test_slots, TestSlot
     
     # many_to_many :sections, Section, join_through: "tests_sections"
     # many_to_many :groups, Group, join_through: "tests_groups"
