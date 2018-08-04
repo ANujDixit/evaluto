@@ -18,6 +18,12 @@ defmodule Server.Quiz.Access.Section do
         |> where([s], s.tenant_id == ^resource.tenant.id)
         |> Repo.get!(id)
       end  
+      
+      def get_or_create_section!(resource, section_params) do
+        if name = section_params["name"] do
+          Repo.get_by(Section, name: name) || create_section(resource, section_params)
+        end
+      end
     
       def create_section(resource, attrs \\ %{}) do
         Ecto.build_assoc(resource.tenant, :sections)
