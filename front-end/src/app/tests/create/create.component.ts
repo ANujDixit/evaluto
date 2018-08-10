@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { durations } from '../../shared/data/durations.data';
 import { ApiService } from '../../core/services/api.service';
 import { MatStepper } from '@angular/material';
@@ -12,6 +12,7 @@ import { MatStepper } from '@angular/material';
 export class CreateComponent implements OnInit {
   
   testFormGroup: FormGroup;
+  sectionFormGroup: FormGroup;
   settingFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   forthFormGroup: FormGroup;
@@ -21,6 +22,7 @@ export class CreateComponent implements OnInit {
   categories: any[]; 
   test: any;
   step = 0;
+  sections: any;
 
   @ViewChild('stepper') stepper: MatStepper;
   
@@ -41,6 +43,10 @@ export class CreateComponent implements OnInit {
       instruction: ''  
     });
 
+    this.sectionFormGroup = this._formBuilder.group({     
+      sections: this._formBuilder.array([ this.createSection(), this.createSection(), this.createSection(),  ])
+    });    
+
     this.settingFormGroup = this._formBuilder.group({
       group_questions_section_wise: ['1', Validators.required],
       sections_shuffle: ['0', Validators.required],
@@ -56,6 +62,19 @@ export class CreateComponent implements OnInit {
     this.fifthFormGroup = this._formBuilder.group({
       fifthCtrl: ['', Validators.required]
     });
+  }
+
+  createSection(): FormGroup {
+    return this._formBuilder.group({
+      name: ''   
+    });
+  }
+
+  get sectionData() { return this.sectionFormGroup.get('sections');}
+
+  addSections(): void {
+    this.sections = this.sectionFormGroup.get('sections') as FormArray;
+    this.sections.push(this.createSection());
   }
 
   fetchData(){

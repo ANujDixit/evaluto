@@ -44,7 +44,7 @@ defmodule Server.Mixfile do
       {:guardian, "~> 1.0"},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 0.12"},
-      {:timex, "~> 3.1"},
+      {:timex, "~> 3.3"},
       {:cors_plug, "~> 1.5"},
       {:slugger, "~> 0.2"},
       {:bamboo, github: "thoughtbot/bamboo"},

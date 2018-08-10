@@ -55,14 +55,28 @@
             <div class="card-footer" fxLayout="row" fxLayoutAlign="end center">          
               <button type="button" mat-button (click)="createTest()">Next</button>        
               <!--<button mat-button matStepperNext>Next</button>-->
-            </div>
-           
+            </div>           
           </div>   
         </div>
       </form>  
     </mat-step>
+    <mat-step [stepControl]="sectionFormGroup" [editable]="isEditable">
+      <form [formGroup]="sectionFormGroup">
+        <ng-template matStepLabel>Add Sections</ng-template>
+        <mat-form-field>
+          <div formArrayName="sections" *ngFor="let section of sectionFormGroup.get('sections')['controls']; let i = index;">
+            <div [formGroupName]="i">
+              <input matInput placeholder="Section name" formControlName="name" required>
+            </div>  
+          </div>  
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
     <mat-step [stepControl]="settingFormGroup" [editable]="isEditable">
-
       <form [formGroup]="settingFormGroup">
         <ng-template matStepLabel>Test Settings</ng-template>
         <div class="container">
@@ -136,7 +150,7 @@
           </div>  
       </form>
     </mat-step>
-     <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
+    <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
       <form [formGroup]="thirdFormGroup">
         <ng-template matStepLabel>Add Question</ng-template>
         <mat-form-field>

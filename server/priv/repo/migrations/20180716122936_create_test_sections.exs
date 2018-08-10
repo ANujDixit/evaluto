@@ -20,6 +20,6 @@ defmodule Server.Repo.Migrations.CreateTestSections do
     create index(:test_sections, [:tenant_id])
     create index(:test_sections, [:test_id])
     create index(:test_sections, [:section_id])
-    create unique_index(:test_sections [:tenant_id, :test_id, :section_id], name: :tenant_test_section)
+    create unique_index(:test_sections, [:tenant_id, :test_id, :section_id], name: :tenant_test_section)
   end
 end
