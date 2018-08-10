@@ -63,13 +63,13 @@
     <mat-step [stepControl]="sectionFormGroup" [editable]="isEditable">
       <form [formGroup]="sectionFormGroup">
         <ng-template matStepLabel>Add Sections</ng-template>
-        <mat-form-field>
-          <div formArrayName="sections" *ngFor="let section of sectionFormGroup.get('sections')['controls']; let i = index;">
-            <div [formGroupName]="i">
+        <div formArrayName="sections">
+          <div *ngFor="let section of sectionForms.controls; let i = index" [formGroupName]="i">
+             <mat-form-field>
               <input matInput placeholder="Section name" formControlName="name" required>
-            </div>  
+            </mat-form-field>
           </div>  
-        </mat-form-field>
+        </div>
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>

@@ -28,12 +28,12 @@ export class CreateComponent implements OnInit {
   
   isEditable = true;
 
-  constructor(private _formBuilder: FormBuilder,
+  constructor(private fb: FormBuilder,
               private api: ApiService ) { }
 
   ngOnInit() {
     this.fetchData();
-    this.testFormGroup = this._formBuilder.group({
+    this.testFormGroup = this.fb.group({
       name: ['', Validators.required],
       category: '',
       duration: '',  
@@ -43,38 +43,41 @@ export class CreateComponent implements OnInit {
       instruction: ''  
     });
 
-    this.sectionFormGroup = this._formBuilder.group({     
-      sections: this._formBuilder.array([ this.createSection(), this.createSection(), this.createSection(),  ])
+    this.sectionFormGroup = this.fb.group({     
+      sections: this.fb.array([ this.createSection(1), this.createSection(2), this.createSection(3)])
     });    
 
-    this.settingFormGroup = this._formBuilder.group({
+    this.settingFormGroup = this.fb.group({
       group_questions_section_wise: ['1', Validators.required],
       sections_shuffle: ['0', Validators.required],
       questions_shuffle: ['0', Validators.required],
       options_shuffle: ['0', Validators.required]
     });
-     this.thirdFormGroup = this._formBuilder.group({
+     this.thirdFormGroup = this.fb.group({
       thirdCtrl: ['', Validators.required]
     });
-    this.forthFormGroup = this._formBuilder.group({
+    this.forthFormGroup = this.fb.group({
       forthCtrl: ['', Validators.required]
     });
-    this.fifthFormGroup = this._formBuilder.group({
+    this.fifthFormGroup = this.fb.group({
       fifthCtrl: ['', Validators.required]
     });
   }
 
-  createSection(): FormGroup {
-    return this._formBuilder.group({
-      name: ''   
+  createSection(seq: number): FormGroup {
+    return this.fb.group({
+      name: '',
+      seq: seq
     });
   }
 
-  get sectionData() { return this.sectionFormGroup.get('sections');}
+  get sectionForms() { 
+    return this.sectionFormGroup.get('sections') as FormArray;
+  }
 
   addSections(): void {
     this.sections = this.sectionFormGroup.get('sections') as FormArray;
-    this.sections.push(this.createSection());
+    this.sections.push(this.createSection(this.sectionForms.length));
   }
 
   fetchData(){
